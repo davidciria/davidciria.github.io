@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏆 Chavakes 🏀⚽</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input,
+        button {
+            margin: 10px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        #downloadLink {
+            display: block;
+            margin-top: 20px;
+            font-size: 18px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        #fileContent {
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>🏆 Chavakes 🏀⚽</h2>
+    <input type="password" id="password" placeholder="🔑 Ingresa tu contraseña">
+    <br>
+    <input type="file" id="fileInput">
+    <button onclick="encryptFile()">🔒 Encriptar</button>
+    <!-- <button onclick="decryptFile()">🔓 Desencriptar</button> -->
+    <br>
+    <!-- <input type="text" id="fileUrl" placeholder="🌍 Ingresa la URL del archivo"> -->
+    <button onclick="fetchAndDecryptFile()">📥 Desencriptar </button>
+    <br>
+    <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
+    <div id="fileContent"></div>
+
+    <script>
+        async function encryptData(data, password) {
+            const key = await deriveKey(password);
+            const iv = crypto.getRandomValues(new Uint8Array(12));
+            const encryptedData = await crypto.subtle.encrypt(
+                { name: "AES-GCM", iv },
+                key,
+                data
+            );
+            return { encryptedData, iv };
+        }
+
+        async function decryptData(encryptedData, iv, password) {
+            const key = await deriveKey(password);
+            return crypto.subtle.decrypt(
+                { name: "AES-GCM", iv },
+                key,
+                encryptedData
+            );
+        }
+
+        async function deriveKey(password) {
+            const encoder = new TextEncoder();
+            const keyMaterial = await crypto.subtle.importKey(
+                "raw",
+                encoder.encode(password),
+                { name: "PBKDF2" },
+                false,
+                ["deriveKey"]
+            );
+            return crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+                    salt: encoder.encode("salt"),
+                    iterations: 100000,
+                    hash: "SHA-256"
+                },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                false,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        function encryptFile() {
+            const fileInput = document.getElementById("fileInput");
+            const password = document.getElementById("password").value;
+            if (!password || fileInput.files.length === 0) {
+                alert("Introduce una contraseña y selecciona un archivo");
+                return;
+            }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const arrayBuffer = event.target.result;
+                const { encryptedData, iv } = await encryptData(arrayBuffer, password);
+                const blob = new Blob([iv, encryptedData], { type: "application/octet-stream" });
+                const url = URL.createObjectURL(blob);
+                const downloadLink = document.getElementById("downloadLink");
+                downloadLink.href = url;
+                downloadLink.download = "archivo_encriptado";
+                downloadLink.style.display = "block";
+                downloadLink.innerText = "📂 Descargar Archivo Encriptado";
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function decryptFile() {
+            const fileInput = document.getElementById("fileInput");
+            const password = document.getElementById("password").value;
+            if (!password || fileInput.files.length === 0) {
+                alert("Introduce una contraseña y selecciona un archivo");
+                return;
+            }
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.onload = async function (event) {
+                const arrayBuffer = event.target.result;
+                const iv = new Uint8Array(arrayBuffer.slice(0, 12));
+                const encryptedData = arrayBuffer.slice(12);
+                try {
+                    const decryptedData = await decryptData(encryptedData, iv, password);
+                    const blob = new Blob([decryptedData], { type: "application/octet-stream" });
+                    const url = URL.createObjectURL(blob);
+                    const downloadLink = document.getElementById("downloadLink");
+                    downloadLink.href = url;
+                    downloadLink.download = "archivo_desencriptado";
+                    downloadLink.style.display = "block";
+                    downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
+
+                    const textDecoder = new TextDecoder();
+                    const fileContent = document.getElementById("fileContent");
+                    fileContent.innerText = textDecoder.decode(decryptedData);
+                    fileContent.style.display = "block";
+                } catch (error) {
+                    alert("Error al desencriptar el archivo. Verifica la contraseña.");
+                    console.error(error);
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        async function fetchAndDecryptFile() {
+            const url = "https://davidciria.github.io/file";
+            const password = document.getElementById("password").value;
+            if (!url || !password) {
+                alert("Introduce una URL y una contraseña");
+                return;
+            }
+            try {
+                const response = await fetch(url);
+                const arrayBuffer = await response.arrayBuffer();
+                const iv = new Uint8Array(arrayBuffer.slice(0, 12));
+                const encryptedData = arrayBuffer.slice(12);
+
+                const decryptedData = await decryptData(encryptedData, iv, password);
+                const blob = new Blob([decryptedData], { type: "application/octet-stream" });
+                const downloadLink = document.getElementById("downloadLink");
+                downloadLink.href = URL.createObjectURL(blob);
+                downloadLink.download = "archivo_desencriptado";
+                downloadLink.style.display = "block";
+                downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
+
+                const textDecoder = new TextDecoder();
+                const fileContent = document.getElementById("fileContent");
+                let textContent = textDecoder.decode(decryptedData);
+
+                const regex = /#EXTINF:[^,]+,([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
+
+                let resultado;
+                const canales = [];
+
+                while ((resultado = regex.exec(textContent)) !== null) {
+                    const nombre = resultado[1].trim();  // Extrae el nombre después de la coma y lo limpia de espacios
+                    const enlace = resultado[2];         // Extrae el enlace despues de "acestream://"
+                    canales.push({ nombre, enlace });
+                }
+
+                canales.forEach(c => {
+                    fileContent.innerHTML += `
+                        <div>${c.nombre}</div>
+                        <div><a href="${c.enlace}">${c.enlace}</a></div>
+                        <br>
+                    `;
+                });
+                fileContent.style.display = "block";
+
+            } catch (error) {
+                alert("Error al descargar o desencriptar el archivo");
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+
+</html>
