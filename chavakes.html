@@ -55,16 +55,22 @@
 
 <body>
     <h2>🏆 Chavakes 🏀⚽</h2>
-    <input type="password" id="password" placeholder="🔑 Ingresa tu contraseña">
-    <!-- <br> -->
-    <!-- <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
-        <input type="file" id="fileInput" style="max-width: 100%;">
-    </div> -->
+    <input type="password" id="password" placeholder="🔑 Contrasenya">
+    <br>
+    <div style="border-radius: 20px;background-color: #d2d2d2;">
+        <h2 style="padding-top: 20px;">Utilitzar nomès si no tens reproductor</h2>
+        <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing" target="_blank" style="color: white;">📥 Descarregar Reproductor Encriptat</a></button>
+    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
+        <button onclick="document.getElementById('fileInput').click()">Selecciona Reproductor Encriptat</button>
+        <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
+    </div>
     <!-- <button onclick="encryptFile()">🔒 Encriptar archivo</button> -->
-    <!-- <button onclick="decryptFile()">🔓 Desencriptar archivo</button> -->
+
+    <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
+</div>
     <br>
     <!-- <input type="text" id="fileUrl" placeholder="🌍 Ingresa la URL del archivo"> -->
-    <button onclick="fetchAndDecryptFile()">📥 Desencriptar </button>
+    <button onclick="fetchAndDecryptFile()">📥 Desencriptar Llista</button>
     <br>
     <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
     <div id="fileContent"></div>
@@ -113,59 +119,109 @@
             );
         }
 
-        function encryptFile() {
+        async function encryptFile() {
             const fileInput = document.getElementById("fileInput");
             const password = document.getElementById("password").value;
             if (!password || fileInput.files.length === 0) {
-                alert("Introduce una contraseña y selecciona un archivo");
+                alert("Introdueix la contrasenya i selecciona l'arxiu");
                 return;
             }
+
             const file = fileInput.files[0];
-            const reader = new FileReader();
-            reader.onload = async function (event) {
-                const arrayBuffer = event.target.result;
+            const chunkSize = 1024 * 1024; // 1MB por fragmento
+            const totalChunks = Math.ceil(file.size / chunkSize);
+            const key = await deriveKey(password);
+            let encryptedChunks = [];
+
+            for (let i = 0; i < totalChunks; i++) {
+                const chunk = file.slice(i * chunkSize, (i + 1) * chunkSize);
+                const arrayBuffer = await chunk.arrayBuffer();
                 const { encryptedData, iv } = await encryptData(arrayBuffer, password);
-                const blob = new Blob([iv, encryptedData], { type: "application/octet-stream" });
-                const url = URL.createObjectURL(blob);
-                const downloadLink = document.getElementById("downloadLink");
-                downloadLink.href = url;
-                downloadLink.download = "archivo_encriptado";
-                downloadLink.style.display = "block";
-                downloadLink.innerText = "📂 Descargar Archivo Encriptado";
-            };
-            reader.readAsArrayBuffer(file);
+                
+                // Almacenar IV (12 bytes) + longitud de datos cifrados (4 bytes) + datos cifrados
+                const encryptedDataBytes = new Uint8Array(encryptedData);
+                const lengthBuffer = new Uint8Array(new Uint32Array([encryptedDataBytes.length]).buffer);
+                encryptedChunks.push(iv, lengthBuffer, encryptedDataBytes);
+            }
+
+            // Unir fragmentos en un Blob
+            const blob = new Blob(encryptedChunks, { type: "application/octet-stream" });
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.getElementById("downloadLink");
+            downloadLink.href = url;
+            downloadLink.download = "archivo_encriptado.bin";
+            downloadLink.style.display = "block";
+            downloadLink.innerText = "📂 Descargar Archivo Encriptado";
         }
 
-        function decryptFile() {
+        async function decryptFile() {
             const fileInput = document.getElementById("fileInput");
             const password = document.getElementById("password").value;
             if (!password || fileInput.files.length === 0) {
-                alert("Introduce una contraseña y selecciona un archivo");
+                alert("Introdueix la contrasenya i selecciona el reproductor encriptat");
                 return;
             }
+
             const file = fileInput.files[0];
+            const key = await deriveKey(password);
+            let decryptedChunks = [];
+
             const reader = new FileReader();
             reader.onload = async function (event) {
-                const arrayBuffer = event.target.result;
-                const iv = new Uint8Array(arrayBuffer.slice(0, 12));
-                const encryptedData = arrayBuffer.slice(12);
                 try {
-                    const decryptedData = await decryptData(encryptedData, iv, password);
-                    const blob = new Blob([decryptedData], { type: "application/octet-stream" });
+                    const arrayBuffer = event.target.result;
+                    let offset = 0;
+
+                    while (offset < arrayBuffer.byteLength) {
+                        // Leer IV (12 bytes)
+                        if (offset + 12 > arrayBuffer.byteLength) {
+                            throw new Error("Archivo corrupto: IV incompleto.");
+                        }
+                        const iv = new Uint8Array(arrayBuffer.slice(offset, offset + 12));
+                        offset += 12;
+
+                        // Leer longitud de datos cifrados (4 bytes)
+                        if (offset + 4 > arrayBuffer.byteLength) {
+                            throw new Error("Archivo corrupto: Longitud faltante.");
+                        }
+                        const lengthArray = new Uint32Array(arrayBuffer.slice(offset, offset + 4));
+                        const encryptedDataLength = lengthArray[0];
+                        offset += 4;
+
+                        // Leer datos cifrados
+                        if (offset + encryptedDataLength > arrayBuffer.byteLength) {
+                            throw new Error("Archivo corrupto: Datos cifrados incompletos.");
+                        }
+                        const encryptedChunk = arrayBuffer.slice(offset, offset + encryptedDataLength);
+                        offset += encryptedDataLength;
+
+                        // Desencriptar
+                        try {
+                            const decryptedData = await crypto.subtle.decrypt(
+                                { name: "AES-GCM", iv },
+                                key,
+                                encryptedChunk
+                            );
+                            decryptedChunks.push(new Uint8Array(decryptedData));
+                        } catch (decryptError) {
+                            console.error("Error de desencriptación:", decryptError);
+                            alert("Contrasenya incorrecte");
+                            return;
+                        }
+                    }
+
+                    // Crear y descargar archivo desencriptado
+                    const blob = new Blob(decryptedChunks, { type: "application/octet-stream" });
                     const url = URL.createObjectURL(blob);
                     const downloadLink = document.getElementById("downloadLink");
                     downloadLink.href = url;
-                    downloadLink.download = "file";
+                    downloadLink.download = "player.exe";
                     downloadLink.style.display = "block";
-                    downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
+                    downloadLink.innerText = "📂 Descarregar Reproductor Desencriptat"
 
-                    const textDecoder = new TextDecoder();
-                    const fileContent = document.getElementById("fileContent");
-                    fileContent.innerText = textDecoder.decode(decryptedData);
-                    fileContent.style.display = "block";
                 } catch (error) {
-                    alert("Error al desencriptar el archivo. Verifica la contraseña.");
-                    console.error(error);
+                    console.error("Error general:", error);
+                    alert("Error al procesar el archivo.");
                 }
             };
             reader.readAsArrayBuffer(file);
@@ -175,7 +231,7 @@
             const url = "https://davidciria.github.io/file";
             const password = document.getElementById("password").value;
             if (!url || !password) {
-                alert("Introduce una URL y una contraseña");
+                alert("Introdueix la contrasenya");
                 return;
             }
             try {
@@ -217,7 +273,7 @@
                 fileContent.style.display = "block";
 
             } catch (error) {
-                alert("Error al descargar o desencriptar el archivo");
+                alert("Error al descarregar o desencriptar, revisa contrasenya");
                 console.error(error);
             }
         }
