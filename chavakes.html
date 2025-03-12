@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <title>🏆 Chavakes 🏀⚽</title>
     <style>
         body {
@@ -56,10 +56,12 @@
 <body>
     <h2>🏆 Chavakes 🏀⚽</h2>
     <input type="password" id="password" placeholder="🔑 Ingresa tu contraseña">
-    <br>
-    <input type="file" id="fileInput">
-    <button onclick="encryptFile()">🔒 Encriptar</button>
-    <!-- <button onclick="decryptFile()">🔓 Desencriptar</button> -->
+    <!-- <br> -->
+    <!-- <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
+        <input type="file" id="fileInput" style="max-width: 100%;">
+    </div> -->
+    <!-- <button onclick="encryptFile()">🔒 Encriptar archivo</button> -->
+    <!-- <button onclick="decryptFile()">🔓 Desencriptar archivo</button> -->
     <br>
     <!-- <input type="text" id="fileUrl" placeholder="🌍 Ingresa la URL del archivo"> -->
     <button onclick="fetchAndDecryptFile()">📥 Desencriptar </button>
@@ -153,7 +155,7 @@
                     const url = URL.createObjectURL(blob);
                     const downloadLink = document.getElementById("downloadLink");
                     downloadLink.href = url;
-                    downloadLink.download = "archivo_desencriptado";
+                    downloadLink.download = "file";
                     downloadLink.style.display = "block";
                     downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
 
@@ -184,11 +186,11 @@
 
                 const decryptedData = await decryptData(encryptedData, iv, password);
                 const blob = new Blob([decryptedData], { type: "application/octet-stream" });
-                const downloadLink = document.getElementById("downloadLink");
-                downloadLink.href = URL.createObjectURL(blob);
-                downloadLink.download = "archivo_desencriptado";
-                downloadLink.style.display = "block";
-                downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
+                // const downloadLink = document.getElementById("downloadLink");
+                // downloadLink.href = URL.createObjectURL(blob);
+                // downloadLink.download = "file";
+                // downloadLink.style.display = "block";
+                // downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
 
                 const textDecoder = new TextDecoder();
                 const fileContent = document.getElementById("fileContent");
