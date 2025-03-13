@@ -263,7 +263,7 @@
                     canales.push({ nombre, enlace });
                 }
 
-                canales.forEach(c, i => {
+                canales.forEach((c, i) => {
                     fileContent.innerHTML += `
                         <div>${i}. ${c.nombre}</div>
                         <div><a href="acestream://${c.enlace}">${c.enlace}</a></div>
