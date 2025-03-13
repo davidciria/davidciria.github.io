@@ -265,7 +265,7 @@
 
                 canales.forEach((c, i) => {
                     fileContent.innerHTML += `
-                        <div>${i}. ${c.nombre}</div>
+                        <div>${i + 1}. ${c.nombre}</div>
                         <div><a href="acestream://${c.enlace}">${c.enlace}</a></div>
                         <br>
                     `;
