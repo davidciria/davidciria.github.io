@@ -279,6 +279,7 @@
                 const regex = /#EXTINF:[^,]+,([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
 
                 let resultado;
+                canales = [];
                 while ((resultado = regex.exec(textContent)) !== null) {
                     const nombre = resultado[1].trim();  // Extrae el nombre después de la coma y lo limpia de espacios
                     const enlace = resultado[2];         // Extrae el enlace despues de "acestream://"
@@ -315,6 +316,7 @@
                     const regex = /#EXTINF:[^,]+,([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
 
                     let resultado;
+                    canales = [];
                     while ((resultado = regex.exec(textContent)) !== null) {
                         const nombre = resultado[1].trim();  // Extrae el nombre después de la coma y lo limpia de espacios
                         const enlace = resultado[2];         // Extrae el enlace despues de "acestream://"
