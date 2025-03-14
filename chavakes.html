@@ -287,15 +287,53 @@
 
                 fileContent.innerHTML = ''
                 canales.forEach((c, i) => {
-                    fileContent.innerHTML += `
+                    if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
+                        fileContent.innerHTML += `
                         <div>${i + 1}. ${c.nombre}</div>
                         <div><a href="acestream://${c.enlace}">${c.enlace}</a></div>
                         <br>
-                    `;
+                        `;
+                    }
                 });
 
                 fileContent.style.display = "block";
                 buscador.style.display = "inline";
+
+                setInterval(async () => {
+                    console.log("Reloading list...");
+
+                    const response = await fetch(url);
+                    const arrayBuffer = await response.arrayBuffer();
+                    const iv = new Uint8Array(arrayBuffer.slice(0, 12));
+                    const encryptedData = arrayBuffer.slice(12);
+
+                    const decryptedData = await decryptData(encryptedData, iv, password);
+                    const blob = new Blob([decryptedData], { type: "application/octet-stream" });
+
+                    let textContent = textDecoder.decode(decryptedData);
+
+                    const regex = /#EXTINF:[^,]+,([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
+
+                    let resultado;
+                    while ((resultado = regex.exec(textContent)) !== null) {
+                        const nombre = resultado[1].trim();  // Extrae el nombre después de la coma y lo limpia de espacios
+                        const enlace = resultado[2];         // Extrae el enlace despues de "acestream://"
+                        canales.push({ nombre, enlace });
+                    }
+
+                    fileContent.innerHTML = ''
+                    canales.forEach((c, i) => {
+                        if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
+                            fileContent.innerHTML += `
+                        <div>${i + 1}. ${c.nombre}</div>
+                        <div><a href="acestream://${c.enlace}">${c.enlace}</a></div>
+                        <br>
+                        `;
+                        }
+                    });
+
+                    console.log("Loaded completed");
+                }, 30000);
 
             } catch (error) {
                 alert("Error al descarregar o desencriptar, revisa contrasenya");
