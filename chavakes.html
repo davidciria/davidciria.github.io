@@ -44,7 +44,7 @@
         }
 
         #fileContent {
-            overflow-wrap: break-word; 
+            overflow-wrap: break-word;
             background-color: white;
             padding: 10px;
             border: 1px solid #ccc;
@@ -59,20 +59,23 @@
     <br>
     <div style="border-radius: 20px;background-color: #d2d2d2;">
         <h2 style="padding-top: 20px;">Utilitzar només si no tens reproductor</h2>
-        <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing" target="_blank" style="color: white;">📥 Descarregar Reproductor Encriptat</a></button>
-    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
-        <button onclick="document.getElementById('fileInput').click()">Selecciona Reproductor Encriptat</button>
-        <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
-    </div>
-    <!-- <button onclick="encryptFile()">🔒 Encriptar archivo</button> -->
+        <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing"
+                target="_blank" style="color: white;">📥 Descarregar Reproductor Encriptat</a></button>
+        <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
+            <button onclick="document.getElementById('fileInput').click()">Selecciona Reproductor Encriptat</button>
+            <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
+        </div>
+        <!-- <button onclick="encryptFile()">🔒 Encriptar archivo</button> -->
 
-    <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
-</div>
+        <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
+    </div>
     <br>
     <!-- <input type="text" id="fileUrl" placeholder="🌍 Ingresa la URL del archivo"> -->
     <button onclick="fetchAndDecryptFile()">📥 Desencriptar Llista</button>
     <br>
     <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
+
+    <input type="text" id="buscador" placeholder="🔎 Buscador" style="display: none;" oninput="updateSearch()">
     <div id="fileContent"></div>
 
     <script>
@@ -137,7 +140,7 @@
                 const chunk = file.slice(i * chunkSize, (i + 1) * chunkSize);
                 const arrayBuffer = await chunk.arrayBuffer();
                 const { encryptedData, iv } = await encryptData(arrayBuffer, password);
-                
+
                 // Almacenar IV (12 bytes) + longitud de datos cifrados (4 bytes) + datos cifrados
                 const encryptedDataBytes = new Uint8Array(encryptedData);
                 const lengthBuffer = new Uint8Array(new Uint32Array([encryptedDataBytes.length]).buffer);
@@ -227,6 +230,26 @@
             reader.readAsArrayBuffer(file);
         }
 
+        var canales = [];
+
+        async function updateSearch() {
+
+            const buscador = document.getElementById("buscador");
+            const fileContent = document.getElementById("fileContent");
+
+            fileContent.innerHTML = ''
+            canales.forEach((c, i) => {
+                if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
+                    fileContent.innerHTML += `
+                        <div>${i + 1}. ${c.nombre}</div>
+                        <div><a href="acestream://${c.enlace}">${c.enlace}</a></div>
+                        <br>
+                    `;
+                }
+            });
+
+        }
+
         async function fetchAndDecryptFile() {
             const url = "https://davidciria.github.io/file";
             const password = document.getElementById("password").value;
@@ -250,19 +273,19 @@
 
                 const textDecoder = new TextDecoder();
                 const fileContent = document.getElementById("fileContent");
+                const buscador = document.getElementById("buscador");
                 let textContent = textDecoder.decode(decryptedData);
 
                 const regex = /#EXTINF:[^,]+,([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
 
                 let resultado;
-                const canales = [];
-
                 while ((resultado = regex.exec(textContent)) !== null) {
                     const nombre = resultado[1].trim();  // Extrae el nombre después de la coma y lo limpia de espacios
                     const enlace = resultado[2];         // Extrae el enlace despues de "acestream://"
                     canales.push({ nombre, enlace });
                 }
 
+                fileContent.innerHTML = ''
                 canales.forEach((c, i) => {
                     fileContent.innerHTML += `
                         <div>${i + 1}. ${c.nombre}</div>
@@ -270,7 +293,9 @@
                         <br>
                     `;
                 });
+
                 fileContent.style.display = "block";
+                buscador.style.display = "inline";
 
             } catch (error) {
                 alert("Error al descarregar o desencriptar, revisa contrasenya");
