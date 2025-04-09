@@ -329,7 +329,7 @@
                 const buscador = document.getElementById("buscador");
                 let textContent = textDecoder.decode(decryptedData);
 
-                const regex = /#EXTINF:-1\s+tvg-logo="([^"]+)"\s+tvg-id="([^"]+)"\s+group-title="([^"]+)",\s*([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
+                const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
 
                 let resultado;
                 canales = [];
@@ -377,7 +377,7 @@
 
                     let textContent = textDecoder.decode(decryptedData);
 
-                    const regex = /#EXTINF:-1\s+tvg-logo="([^"]+)"\s+tvg-id="([^"]+)"\s+group-title="([^"]+)",\s*([^,]+)\s*acestream:\/\/([a-f0-9]+)/g;
+                    const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
 
                     let resultado;
                     canales = [];
