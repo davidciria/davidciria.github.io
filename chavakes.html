@@ -83,24 +83,43 @@
       box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
     }
 
-    .channel-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      padding: 20px;
-      margin: 15px;
-      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      transition: all 0.3s ease;
-      backdrop-filter: blur(12px);
-    }
+ .channel-card {
+  background: rgba(30, 30, 30, 0.85); /* Fondo oscuro semitransparente */
+  border-radius: 15px;
+  padding: 20px;
+  margin: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(12px);
+  color: #f0f0f0; /* Texto claro */
+}
 
-    .channel-card:hover {
-      transform: translateY(-5px) scale(1.03);
-      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
-    }
+.channel-card:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+}
+
+.channel-card h3 {
+  margin: 5px 0;
+  font-size: 20px;
+  color: #ffffff; /* Blanco para los títulos */
+}
+
+.channel-card a {
+  color: #3ec7ff; /* Azul brillante para el enlace */
+  text-decoration: none;
+  font-weight: bold;
+  word-break: break-all;
+}
+
+.channel-card a:hover {
+  text-decoration: underline;
+  color: #00ff9d; /* Verde fosfo al pasar el ratón */
+}
 
     .channel-logo {
       max-height: 70px;
@@ -114,24 +133,6 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-    }
-
-    .channel-card h3 {
-      margin: 5px 0;
-      font-size: 20px;
-      color: #ffffff;
-    }
-
-    .channel-card a {
-      color: #34c3ff;
-      text-decoration: none;
-      font-weight: bold;
-      word-break: break-all;
-    }
-
-    .channel-card a:hover {
-      text-decoration: underline;
-      color: #fff;
     }
 
     .epg-container {
