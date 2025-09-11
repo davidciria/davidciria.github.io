@@ -2,537 +2,450 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <title>🏆 Chavakes 🏀⚽</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
+  <title>🏆 Chavakes 🏀⚽</title>
+  <style>
+    /* === ESTILOS MODERNOS MOLONES === */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
+      padding: 20px;
+      margin: 0;
+    }
 
-        h2 {
-            color: #333;
-        }
+    h2 {
+      color: #ffffff;
+      margin-bottom: 15px;
+      text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
+    }
 
-        input,
-        button {
-            margin: 10px;
-            padding: 10px;
-            font-size: 16px;
-        }
+    input,
+    button {
+      margin: 10px;
+      padding: 12px 18px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+    }
 
-        button {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+    input {
+      width: 220px;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      backdrop-filter: blur(8px);
+    }
 
-        button:hover {
-            background-color: #218838;
-        }
+    input::placeholder {
+      color: #e0e0e0;
+    }
 
-        #downloadLink {
-            display: block;
-            margin-top: 20px;
-            font-size: 18px;
-            text-decoration: none;
-            color: #007bff;
-        }
+    button {
+      background: linear-gradient(135deg, #28a745, #1d7d34);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    }
 
-        #fileContent {
-            overflow-wrap: break-word;
-            padding: 10px;
-            border: 1px solid #ccc;
-            display: none;
-            background-color: #d2d2d2;
-            border-radius: 10px;
-        }
+    button:hover {
+      transform: scale(1.05);
+      background: linear-gradient(135deg, #34c759, #248f42);
+    }
 
-        .channel-card {
-            background-color: rgb(0 71 32);
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
-            box-shadow: 0 4px 6px rgba(74, 66, 66, 0.1);
-            text-align: left;
-            flex-direction: column;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow-wrap: anywhere;
-        }
+    #downloadLink {
+      display: block;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      text-decoration: none;
+      color: #34c3ff;
+      transition: color 0.3s ease;
+    }
 
-        .channel-logo {
-            max-height: 50px;
-            max-width: 50px;
-            border-radius: 5px;
-            margin-right: 15px;
-        }
+    #downloadLink:hover {
+      color: #ffffff;
+    }
 
-        .channel-info {
-            display: flex;
-            flex-direction: column;
-        }
+    #fileContent {
+      overflow-wrap: break-word;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 20px;
+      display: none;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
+    }
 
-        .channel-card h3 {
-            margin: 0;
-            font-size: 18px;
-            color: #ffffff;
-        }
+    .channel-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 15px;
+      padding: 20px;
+      margin: 15px;
+      box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(12px);
+    }
 
-        .channel-card a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    .channel-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
+    }
 
-        .channel-card a:hover {
-            text-decoration: underline;
-        }
+    .channel-logo {
+      max-height: 70px;
+      max-width: 70px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+      border: 2px solid #ffffff33;
+    }
 
-        .epg-container {
-            color: white;
-        }
-    </style>
+    .channel-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .channel-card h3 {
+      margin: 5px 0;
+      font-size: 20px;
+      color: #ffffff;
+    }
+
+    .channel-card a {
+      color: #34c3ff;
+      text-decoration: none;
+      font-weight: bold;
+      word-break: break-all;
+    }
+
+    .channel-card a:hover {
+      text-decoration: underline;
+      color: #fff;
+    }
+
+    .epg-container {
+      color: #f0f0f0;
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      font-size: 14px;
+    }
+
+    .epg-item h4 {
+      margin: 5px 0;
+      color: #ffda79;
+    }
+
+    .epg-item p {
+      margin: 0;
+      font-size: 13px;
+      color: #ddd;
+    }
+  </style>
 </head>
 
 <body>
-    <h2>🏆 Chavakes 🏀⚽</h2>
-    <input type="password" id="password" placeholder="🔑 Contrasenya">
-    <br>
-    <div style="border-radius: 20px;background-color: #d2d2d2;">
-        <h2 style="padding-top: 20px;">Utilitzar només si no tens reproductor</h2>
-        <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing"
-                target="_blank" style="color: white;">📥 Descarregar Reproductor Encriptat</a></button>
-        <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
-            <button onclick="document.getElementById('fileInput').click()">Selecciona Reproductor Encriptat</button>
-            <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
-        </div>
-        <!-- <button onclick="encryptFile()">🔒 Encriptar archivo</button> -->
-
-        <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
+  <h2>🏆 Chavakes 🏀⚽</h2>
+  <input type="password" id="password" placeholder="🔑 Contrasenya">
+  <br>
+  <div style="border-radius: 20px;background: rgba(255,255,255,0.12);padding:20px;backdrop-filter:blur(12px);box-shadow:0 6px 15px rgba(0,0,0,0.5);">
+    <h2 style="padding-top: 10px;">⚡ Utilitzar només si no tens reproductor</h2>
+    <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing"
+        target="_blank" style="color: white;text-decoration:none;">📥 Descarregar Reproductor Encriptat</a></button>
+    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
+      <button onclick="document.getElementById('fileInput').click()">📂 Selecciona Reproductor</button>
+      <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
     </div>
-    <br>
-    <!-- <input type="text" id="fileUrl" placeholder="🌍 Ingresa la URL del archivo"> -->
-    <button onclick="fetchAndDecryptFile()">📥 Desencriptar Llista</button>
-    <br>
-    <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
+    <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
+  </div>
+  <br>
+  <button onclick="fetchAndDecryptFile()">📥 Desencriptar Llista</button>
+  <br>
+  <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
 
-    <input type="text" id="buscador" placeholder="🔎 Buscador" style="display: none;" oninput="updateSearch()">
-    <div id="fileContent"></div>
+  <input type="text" id="buscador" placeholder="🔎 Buscador" style="display: none;" oninput="updateSearch()">
+  <div id="fileContent"></div>
 
-    <script>
-        async function encryptData(data, password) {
-            const key = await deriveKey(password);
-            const iv = crypto.getRandomValues(new Uint8Array(12));
-            const encryptedData = await crypto.subtle.encrypt(
-                { name: "AES-GCM", iv },
-                key,
-                data
-            );
-            return { encryptedData, iv };
-        }
+  <!-- 🚀 JavaScript original incluido -->
+  <script>
+    async function encryptData(data, password) {
+      const key = await deriveKey(password);
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encryptedData = await crypto.subtle.encrypt(
+        { name: "AES-GCM", iv },
+        key,
+        data
+      );
+      return { encryptedData, iv };
+    }
 
-        async function decryptData(encryptedData, iv, password) {
-            const key = await deriveKey(password);
-            return crypto.subtle.decrypt(
-                { name: "AES-GCM", iv },
-                key,
-                encryptedData
-            );
-        }
+    async function decryptData(encryptedData, iv, password) {
+      const key = await deriveKey(password);
+      return crypto.subtle.decrypt(
+        { name: "AES-GCM", iv },
+        key,
+        encryptedData
+      );
+    }
 
-        async function deriveKey(password) {
-            const encoder = new TextEncoder();
-            const keyMaterial = await crypto.subtle.importKey(
-                "raw",
-                encoder.encode(password),
-                { name: "PBKDF2" },
-                false,
-                ["deriveKey"]
-            );
-            return crypto.subtle.deriveKey(
-                {
-                    name: "PBKDF2",
-                    salt: encoder.encode("salt"),
-                    iterations: 100000,
-                    hash: "SHA-256"
-                },
-                keyMaterial,
-                { name: "AES-GCM", length: 256 },
-                false,
-                ["encrypt", "decrypt"]
-            );
-        }
+    async function deriveKey(password) {
+      const encoder = new TextEncoder();
+      const keyMaterial = await crypto.subtle.importKey(
+        "raw",
+        encoder.encode(password),
+        { name: "PBKDF2" },
+        false,
+        ["deriveKey"]
+      );
+      return crypto.subtle.deriveKey(
+        {
+          name: "PBKDF2",
+          salt: encoder.encode("salt"),
+          iterations: 100000,
+          hash: "SHA-256"
+        },
+        keyMaterial,
+        { name: "AES-GCM", length: 256 },
+        false,
+        ["encrypt", "decrypt"]
+      );
+    }
 
-        async function encryptFile() {
-            const fileInput = document.getElementById("fileInput");
-            const password = document.getElementById("password").value;
-            if (!password || fileInput.files.length === 0) {
-                alert("Introdueix la contrasenya i selecciona l'arxiu");
-                return;
-            }
+    async function decryptFile() {
+      const fileInput = document.getElementById("fileInput");
+      const password = document.getElementById("password").value;
+      if (!password || fileInput.files.length === 0) {
+        alert("Introdueix la contrasenya i selecciona el reproductor encriptat");
+        return;
+      }
 
-            const file = fileInput.files[0];
-            const chunkSize = 1024 * 1024; // 1MB por fragmento
-            const totalChunks = Math.ceil(file.size / chunkSize);
-            const key = await deriveKey(password);
-            let encryptedChunks = [];
+      const file = fileInput.files[0];
+      const key = await deriveKey(password);
+      let decryptedChunks = [];
 
-            for (let i = 0; i < totalChunks; i++) {
-                const chunk = file.slice(i * chunkSize, (i + 1) * chunkSize);
-                const arrayBuffer = await chunk.arrayBuffer();
-                const { encryptedData, iv } = await encryptData(arrayBuffer, password);
+      const reader = new FileReader();
+      reader.onload = async function (event) {
+        try {
+          const arrayBuffer = event.target.result;
+          let offset = 0;
 
-                // Almacenar IV (12 bytes) + longitud de datos cifrados (4 bytes) + datos cifrados
-                const encryptedDataBytes = new Uint8Array(encryptedData);
-                const lengthBuffer = new Uint8Array(new Uint32Array([encryptedDataBytes.length]).buffer);
-                encryptedChunks.push(iv, lengthBuffer, encryptedDataBytes);
-            }
-
-            // Unir fragmentos en un Blob
-            const blob = new Blob(encryptedChunks, { type: "application/octet-stream" });
-            const url = URL.createObjectURL(blob);
-            const downloadLink = document.getElementById("downloadLink");
-            downloadLink.href = url;
-            downloadLink.download = "archivo_encriptado.bin";
-            downloadLink.style.display = "block";
-            downloadLink.innerText = "📂 Descargar Archivo Encriptado";
-        }
-
-        async function decryptFile() {
-            const fileInput = document.getElementById("fileInput");
-            const password = document.getElementById("password").value;
-            if (!password || fileInput.files.length === 0) {
-                alert("Introdueix la contrasenya i selecciona el reproductor encriptat");
-                return;
-            }
-
-            const file = fileInput.files[0];
-            const key = await deriveKey(password);
-            let decryptedChunks = [];
-
-            const reader = new FileReader();
-            reader.onload = async function (event) {
-                try {
-                    const arrayBuffer = event.target.result;
-                    let offset = 0;
-
-                    while (offset < arrayBuffer.byteLength) {
-                        // Leer IV (12 bytes)
-                        if (offset + 12 > arrayBuffer.byteLength) {
-                            throw new Error("Archivo corrupto: IV incompleto.");
-                        }
-                        const iv = new Uint8Array(arrayBuffer.slice(offset, offset + 12));
-                        offset += 12;
-
-                        // Leer longitud de datos cifrados (4 bytes)
-                        if (offset + 4 > arrayBuffer.byteLength) {
-                            throw new Error("Archivo corrupto: Longitud faltante.");
-                        }
-                        const lengthArray = new Uint32Array(arrayBuffer.slice(offset, offset + 4));
-                        const encryptedDataLength = lengthArray[0];
-                        offset += 4;
-
-                        // Leer datos cifrados
-                        if (offset + encryptedDataLength > arrayBuffer.byteLength) {
-                            throw new Error("Archivo corrupto: Datos cifrados incompletos.");
-                        }
-                        const encryptedChunk = arrayBuffer.slice(offset, offset + encryptedDataLength);
-                        offset += encryptedDataLength;
-
-                        // Desencriptar
-                        try {
-                            const decryptedData = await crypto.subtle.decrypt(
-                                { name: "AES-GCM", iv },
-                                key,
-                                encryptedChunk
-                            );
-                            decryptedChunks.push(new Uint8Array(decryptedData));
-                        } catch (decryptError) {
-                            console.error("Error de desencriptación:", decryptError);
-                            alert("Contrasenya incorrecte");
-                            return;
-                        }
-                    }
-
-                    // Crear y descargar archivo desencriptado
-                    const blob = new Blob(decryptedChunks, { type: "application/octet-stream" });
-                    const url = URL.createObjectURL(blob);
-                    const downloadLink = document.getElementById("downloadLink");
-                    downloadLink.href = url;
-                    downloadLink.download = "player.exe";
-                    downloadLink.style.display = "block";
-                    downloadLink.innerText = "📂 Descarregar Reproductor Desencriptat"
-
-                } catch (error) {
-                    console.error("Error general:", error);
-                    alert("Error al procesar el archivo.");
-                }
-            };
-            reader.readAsArrayBuffer(file);
-        }
-
-        var canales = [];
-
-        async function updateSearch() {
-
-            const buscador = document.getElementById("buscador");
-            const fileContent = document.getElementById("fileContent");
-
-            fileContent.innerHTML = '';
-            canales.forEach((c, i) => {
-                if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
-                    fileContent.innerHTML += `
-                                <div class="channel-card">
-                                    <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
-                                    <div class="channel-info">
-                                        <h3>${i + 1}. ${c.nombre}</h3>
-                                        <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
-                                        <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
-                                    </div>
-                                    <div id="epg-${i}" class="epg-container"></div>
-                                </div>
-                            `;
-                }
-            });
-
-        }
-
-        async function fetchAndDecryptFile() {
-            const url = "https://davidciria.github.io/file";
-            const password = document.getElementById("password").value;
-            if (!url || !password) {
-                alert("Introdueix la contrasenya");
-                return;
-            }
-            try {
-                const response = await fetch(url);
-                const arrayBuffer = await response.arrayBuffer();
-                const iv = new Uint8Array(arrayBuffer.slice(0, 12));
-                const encryptedData = arrayBuffer.slice(12);
-
-                const decryptedData = await decryptData(encryptedData, iv, password);
-                const blob = new Blob([decryptedData], { type: "application/octet-stream" });
-                // const downloadLink = document.getElementById("downloadLink");
-                // downloadLink.href = URL.createObjectURL(blob);
-                // downloadLink.download = "file";
-                // downloadLink.style.display = "block";
-                // downloadLink.innerText = "📂 Descargar Archivo Desencriptado";
-
-                const textDecoder = new TextDecoder();
-                const fileContent = document.getElementById("fileContent");
-                const buscador = document.getElementById("buscador");
-                let textContent = textDecoder.decode(decryptedData);
-
-                const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
-
-                let resultado;
-                canales = [];
-
-                while ((resultado = regex.exec(textContent)) !== null) {
-                    const tvgLogo = resultado[1];   // Extrae la URL del logo
-                    const tvgId = resultado[2];     // Extrae el ID del canal
-                    const groupTitle = resultado[3]; // Extrae el grupo al que pertenece
-                    const nombre = resultado[4].trim();  // Extrae el nombre del canal
-                    const enlace = resultado[5];   // Extrae el enlace acestream
-
-                    canales.push({ tvgLogo, tvgId, groupTitle, nombre, enlace });
-                }
-
-                fileContent.innerHTML = ''
-                canales.forEach((c, i) => {
-                    if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
-                        fileContent.innerHTML += `
-                                <div class="channel-card">
-                                    <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
-                                    <div class="channel-info">
-                                        <h3>${i + 1}. ${c.nombre}</h3>
-                                        <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
-                                        <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
-                                    </div>
-                                    <div id="epg-${i}" class="epg-container"></div>
-                                </div>
-                            `;
-                    }
-                });
-
-                fileContent.style.display = "block";
-                buscador.style.display = "inline";
-
-                setInterval(async () => {
-                    console.log("Reloading list...");
-
-                    const response = await fetch(url);
-                    const arrayBuffer = await response.arrayBuffer();
-                    const iv = new Uint8Array(arrayBuffer.slice(0, 12));
-                    const encryptedData = arrayBuffer.slice(12);
-
-                    const decryptedData = await decryptData(encryptedData, iv, password);
-                    const blob = new Blob([decryptedData], { type: "application/octet-stream" });
-
-                    let textContent = textDecoder.decode(decryptedData);
-
-                    const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
-
-                    let resultado;
-                    canales = [];
-
-                    while ((resultado = regex.exec(textContent)) !== null) {
-                        const tvgLogo = resultado[1];   // Extrae la URL del logo
-                        const tvgId = resultado[2];     // Extrae el ID del canal
-                        const groupTitle = resultado[3]; // Extrae el grupo al que pertenece
-                        const nombre = resultado[4].trim();  // Extrae el nombre del canal
-                        const enlace = resultado[5];   // Extrae el enlace acestream
-
-                        canales.push({ tvgLogo, tvgId, groupTitle, nombre, enlace });
-                    }
-
-                    fileContent.innerHTML = ''
-                    canales.forEach((c, i) => {
-                        if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
-                            fileContent.innerHTML += `
-                                <div class="channel-card">
-                                    <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
-                                    <div class="channel-info">
-                                        <h3>${i + 1}. ${c.nombre}</h3>
-                                        <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
-                                        <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
-                                    </div>
-                                    <div id="epg-${i}" class="epg-container"></div>
-                                </div>
-                            `;
-                        }
-                    });
-
-                    console.log("Loaded completed");
-                }, 30000);
-
-            } catch (error) {
-                alert("Error al descarregar o desencriptar, revisa contrasenya");
-                console.error(error);
-            }
-        }
-
-        let epgXmlDoc = null; // Variable global para almacenar el XML en memoria
-
-        // Cargar la guía EPG al inicio y almacenarla en memoria
-        async function loadEpg() {
-            const epgUrl = "https://corsproxy.io/?url=https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
+          while (offset < arrayBuffer.byteLength) {
+            const iv = new Uint8Array(arrayBuffer.slice(offset, offset + 12));
+            offset += 12;
+            const lengthArray = new Uint32Array(arrayBuffer.slice(offset, offset + 4));
+            const encryptedDataLength = lengthArray[0];
+            offset += 4;
+            const encryptedChunk = arrayBuffer.slice(offset, offset + encryptedDataLength);
+            offset += encryptedDataLength;
 
             try {
-                const response = await fetch(epgUrl);
-                if (!response.ok) throw new Error("Failed to fetch EPG");
-
-                const epgXml = await response.text();
-                const parser = new DOMParser();
-                epgXmlDoc = parser.parseFromString(epgXml, "text/xml");
-                console.log("EPG cargado correctamente en memoria.");
-            } catch (error) {
-                console.error("Error cargando EPG:", error);
+              const decryptedData = await crypto.subtle.decrypt(
+                { name: "AES-GCM", iv },
+                key,
+                encryptedChunk
+              );
+              decryptedChunks.push(new Uint8Array(decryptedData));
+            } catch {
+              alert("Contrasenya incorrecte");
+              return;
             }
+          }
+
+          const blob = new Blob(decryptedChunks, { type: "application/octet-stream" });
+          const url = URL.createObjectURL(blob);
+          const downloadLink = document.getElementById("downloadLink");
+          downloadLink.href = url;
+          downloadLink.download = "player.exe";
+          downloadLink.style.display = "block";
+          downloadLink.innerText = "📂 Descarregar Reproductor Desencriptat"
+
+        } catch (error) {
+          console.error("Error general:", error);
+          alert("Error al procesar el archivo.");
+        }
+      };
+      reader.readAsArrayBuffer(file);
+    }
+
+    var canales = [];
+
+    async function updateSearch() {
+      const buscador = document.getElementById("buscador");
+      const fileContent = document.getElementById("fileContent");
+      fileContent.innerHTML = '';
+      canales.forEach((c, i) => {
+        if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
+          fileContent.innerHTML += `
+              <div class="channel-card">
+                <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
+                <div class="channel-info">
+                  <h3>${i + 1}. ${c.nombre}</h3>
+                  <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
+                  <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
+                </div>
+                <div id="epg-${i}" class="epg-container"></div>
+              </div>`;
+        }
+      });
+    }
+
+    async function fetchAndDecryptFile() {
+      const url = "https://davidciria.github.io/file";
+      const password = document.getElementById("password").value;
+      if (!url || !password) {
+        alert("Introdueix la contrasenya");
+        return;
+      }
+      try {
+        const response = await fetch(url);
+        const arrayBuffer = await response.arrayBuffer();
+        const iv = new Uint8Array(arrayBuffer.slice(0, 12));
+        const encryptedData = arrayBuffer.slice(12);
+        const decryptedData = await decryptData(encryptedData, iv, password);
+
+        const textDecoder = new TextDecoder();
+        const fileContent = document.getElementById("fileContent");
+        const buscador = document.getElementById("buscador");
+        let textContent = textDecoder.decode(decryptedData);
+
+        const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
+
+        let resultado;
+        canales = [];
+
+        while ((resultado = regex.exec(textContent)) !== null) {
+          const tvgLogo = resultado[1];
+          const tvgId = resultado[2];
+          const groupTitle = resultado[3];
+          const nombre = resultado[4].trim();
+          const enlace = resultado[5];
+          canales.push({ tvgLogo, tvgId, groupTitle, nombre, enlace });
         }
 
-        // Convertir fecha de formato EPG a objeto Date, respetando la zona horaria
-        function parseEpgDate(epgDate) {
-            const rawDate = epgDate.split(" ")[0]; // Quitar la zona horaria
-            const tzOffset = epgDate.split(" ")[1] || "+0000"; // Obtener la zona horaria (+0100)
+        fileContent.innerHTML = '';
+        canales.forEach((c, i) => {
+          if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
+            fileContent.innerHTML += `
+                <div class="channel-card">
+                  <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
+                  <div class="channel-info">
+                    <h3>${i + 1}. ${c.nombre}</h3>
+                    <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
+                    <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
+                  </div>
+                  <div id="epg-${i}" class="epg-container"></div>
+                </div>`;
+          }
+        });
 
-            // Extraer la diferencia horaria
-            const sign = tzOffset[0] === "+" ? 1 : -1;
-            const hoursOffset = parseInt(tzOffset.substring(1, 3), 10);
-            const minutesOffset = parseInt(tzOffset.substring(3, 5), 10);
-            const totalOffsetMinutes = sign * (hoursOffset * 60 + minutesOffset);
+        fileContent.style.display = "block";
+        buscador.style.display = "inline";
 
-            // Crear fecha en UTC y ajustar con la zona horaria
-            const dateUtc = new Date(Date.UTC(
-                parseInt(rawDate.substring(0, 4)),  // Año
-                parseInt(rawDate.substring(4, 6)) - 1,  // Mes (0-indexed)
-                parseInt(rawDate.substring(6, 8)),  // Día
-                parseInt(rawDate.substring(8, 10)), // Hora
-                parseInt(rawDate.substring(10, 12)), // Minuto
-                parseInt(rawDate.substring(12, 14)) // Segundo
-            ));
+      } catch (error) {
+        alert("Error al descarregar o desencriptar, revisa contrasenya");
+        console.error(error);
+      }
+    }
 
-            // Ajustar al huso horario correcto
-            return new Date(dateUtc.getTime() - totalOffsetMinutes * 60000);
-        }
+    let epgXmlDoc = null;
 
-        // Obtener la programación actual y siguiente de un canal
-        function getEpgForChannel(channelName) {
-            if (!epgXmlDoc) {
-                console.warn("EPG no cargado aún.");
-                return { current: null, next: null };
-            }
+    async function loadEpg() {
+      const epgUrl = "https://corsproxy.io/?url=https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
+      try {
+        const response = await fetch(epgUrl);
+        const epgXml = await response.text();
+        const parser = new DOMParser();
+        epgXmlDoc = parser.parseFromString(epgXml, "text/xml");
+      } catch (error) {
+        console.error("Error cargando EPG:", error);
+      }
+    }
 
-            const now = new Date();
-            const programs = [...epgXmlDoc.querySelectorAll("programme")]
-                .map(program => {
-                    return {
-                        channel: program.getAttribute("channel"),
-                        title: program.querySelector("title")?.textContent || "Desconocido",
-                        description: program.querySelector("desc")?.textContent || "Sin descripción",
-                        start: parseEpgDate(program.getAttribute("start")),
-                        stop: parseEpgDate(program.getAttribute("stop"))
-                    };
-                })
-                .filter(p => p.channel.toLowerCase() === channelName.toLowerCase())
-                .sort((a, b) => a.start - b.start);
+    function parseEpgDate(epgDate) {
+      const rawDate = epgDate.split(" ")[0];
+      const tzOffset = epgDate.split(" ")[1] || "+0000";
+      const sign = tzOffset[0] === "+" ? 1 : -1;
+      const hoursOffset = parseInt(tzOffset.substring(1, 3), 10);
+      const minutesOffset = parseInt(tzOffset.substring(3, 5), 10);
+      const totalOffsetMinutes = sign * (hoursOffset * 60 + minutesOffset);
 
-            if (programs.length === 0) return { current: null, next: null };
+      const dateUtc = new Date(Date.UTC(
+        parseInt(rawDate.substring(0, 4)),
+        parseInt(rawDate.substring(4, 6)) - 1,
+        parseInt(rawDate.substring(6, 8)),
+        parseInt(rawDate.substring(8, 10)),
+        parseInt(rawDate.substring(10, 12)),
+        parseInt(rawDate.substring(12, 14))
+      ));
+      return new Date(dateUtc.getTime() - totalOffsetMinutes * 60000);
+    }
 
-            const current = programs.find(p => now >= p.start && now < p.stop) || null;
-            const next = programs.find(p => p.start > now) || null;
+    function getEpgForChannel(channelName) {
+      if (!epgXmlDoc) return { current: null, next: null };
+      const now = new Date();
+      const programs = [...epgXmlDoc.querySelectorAll("programme")]
+        .map(program => ({
+          channel: program.getAttribute("channel"),
+          title: program.querySelector("title")?.textContent || "Desconocido",
+          description: program.querySelector("desc")?.textContent || "Sin descripción",
+          start: parseEpgDate(program.getAttribute("start")),
+          stop: parseEpgDate(program.getAttribute("stop"))
+        }))
+        .filter(p => p.channel.toLowerCase() === channelName.toLowerCase())
+        .sort((a, b) => a.start - b.start);
 
-            return { current, next };
-        }
+      const current = programs.find(p => now >= p.start && now < p.stop) || null;
+      const next = programs.find(p => p.start > now) || null;
+      return { current, next };
+    }
 
-        // Formatear fecha en horario de España
-        function formatTime(date) {
-            return new Intl.DateTimeFormat("es-ES", {
-                hour: "2-digit",
-                minute: "2-digit",
-                timeZone: "Europe/Madrid"
-            }).format(date);
-        }
+    function formatTime(date) {
+      return new Intl.DateTimeFormat("es-ES", {
+        hour: "2-digit",
+        minute: "2-digit",
+        timeZone: "Europe/Madrid"
+      }).format(date);
+    }
 
-        // Mostrar la programación en el DOM
-        function showEpg(channelName, containerId) {
-            const epgData = getEpgForChannel(channelName);
-            const container = document.getElementById(containerId);
+    function showEpg(channelName, containerId) {
+      const epgData = getEpgForChannel(channelName);
+      const container = document.getElementById(containerId);
 
-            if (!epgData || (!epgData.current && !epgData.next)) {
-                container.innerHTML = "<p>No hay programación disponible.</p>";
-                return;
-            }
+      if (!epgData || (!epgData.current && !epgData.next)) {
+        container.innerHTML = "<p>No hay programación disponible.</p>";
+        return;
+      }
 
-            let epgHtml = "";
+      let epgHtml = "";
+      if (epgData.current) {
+        epgHtml += `<div class="epg-item">
+          <h4>🔴 Ahora: ${epgData.current.title} (${formatTime(epgData.current.start)} - ${formatTime(epgData.current.stop)})</h4>
+          <p>${epgData.current.description}</p>
+        </div>`;
+      }
+      if (epgData.next) {
+        epgHtml += `<div class="epg-item">
+          <h4>▶️ Siguiente: ${epgData.next.title} (${formatTime(epgData.next.start)} - ${formatTime(epgData.next.stop)})</h4>
+          <p>${epgData.next.description}</p>
+        </div>`;
+      }
+      container.innerHTML = epgHtml;
+    }
 
-            if (epgData.current) {
-                epgHtml += `<div class="epg-item">
-                        <h4>🔴 Ahora: ${epgData.current.title} (${formatTime(epgData.current.start)} - ${formatTime(epgData.current.stop)})</h4>
-                        <p>${epgData.current.description}</p>
-                    </div>`;
-            }
-            if (epgData.next) {
-                epgHtml += `<div class="epg-item">
-                        <h4>▶️ Siguiente: ${epgData.next.title} (${formatTime(epgData.next.start)} - ${formatTime(epgData.next.stop)})</h4>
-                        <p>${epgData.next.description}</p>
-                    </div>`;
-            }
-
-            container.innerHTML = epgHtml;
-        }
-
-        // Cargar el EPG al iniciar la web
-        loadEpg();
-
-
-    </script>
+    loadEpg();
+  </script>
 </body>
 
 </html>
