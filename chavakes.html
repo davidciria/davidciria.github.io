@@ -363,7 +363,7 @@
     let epgXmlDoc = null;
 
     async function loadEpg() {
-      const epgUrl = "https://corsproxy.io/?url=https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
+      const epgUrl = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
       try {
         const response = await fetch(epgUrl);
         const epgXml = await response.text();
