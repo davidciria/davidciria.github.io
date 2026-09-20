@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /chavakes.html
+Disallow: /links.html
+
+Sitemap: https://davidciria.github.io/sitemap.xml
