@@ -4,28 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>David Ciria — AI Security Engineer at NeuralTrust | Barcelona</title>
+    <title>David Ciria — AI Pentester at NeuralTrust | Barcelona</title>
     <meta name="description"
-        content="David Ciria Mayordomo — AI Security Engineer at NeuralTrust, based in Barcelona. Master's in Cybersecurity and Computer Engineering graduate specialized in AI/LLM security, cryptography and full-stack development.">
+        content="David Ciria Mayordomo — AI Pentester at NeuralTrust, based in Barcelona. Master's in Cybersecurity and Computer Engineering graduate specialized in ethical hacking, AI/LLM security, pentesting and full-stack development.">
     <meta name="author" content="David Ciria Mayordomo">
     <meta name="theme-color" content="#fbfbfd">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <meta name="keywords"
-        content="David Ciria, AI Security Engineer, NeuralTrust, cybersecurity Barcelona, LLM security, AI agent security, cryptography, full-stack developer, computer engineering">
+        content="David Ciria, AI Pentester, NeuralTrust, ethical hacker, penetration testing, cybersecurity Barcelona, LLM security, AI agent security, cryptography, full-stack developer, computer engineering">
     <link rel="canonical" href="https://davidciria.github.io/">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="David Ciria">
     <meta property="og:locale" content="en_US">
     <meta property="og:url" content="https://davidciria.github.io/">
-    <meta property="og:title" content="David Ciria — AI Security Engineer at NeuralTrust | Barcelona">
+    <meta property="og:title" content="David Ciria — AI Pentester at NeuralTrust | Barcelona">
     <meta property="og:description"
         content="Portfolio of David Ciria Mayordomo: AI/LLM security, cryptography and full-stack development.">
     <meta property="og:image" content="https://davidciria.github.io/profile.jpg">
     <meta property="og:image:alt" content="David Ciria Mayordomo">
 
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="David Ciria — AI Security Engineer at NeuralTrust">
+    <meta name="twitter:title" content="David Ciria — AI Pentester at NeuralTrust">
     <meta name="twitter:description"
         content="AI/LLM security, cryptography and full-stack development from Barcelona.">
     <meta name="twitter:image" content="https://davidciria.github.io/profile.jpg">
@@ -48,6 +48,7 @@
             --line: #e5e7ec;
             --accent: #2563eb;
             --accent-soft: rgba(37, 99, 235, 0.07);
+            --on-accent: #ffffff;
             --maxw: 940px;
             --radius: 14px;
         }
@@ -61,6 +62,7 @@
                 --line: #24272e;
                 --accent: #7aa2ff;
                 --accent-soft: rgba(122, 162, 255, 0.10);
+                --on-accent: #0d0e12;
             }
         }
 
@@ -181,8 +183,32 @@
             transition: color 0.15s ease;
         }
 
-        .site-header nav a:hover {
+        .site-header nav a:hover,
+        .site-header nav a.active {
             color: var(--accent);
+        }
+
+        .head-right {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            flex-wrap: wrap;
+        }
+
+        .cv-btn {
+            font-size: 0.82rem;
+            font-weight: 500;
+            color: var(--on-accent);
+            background: var(--accent);
+            padding: 9px 18px;
+            border-radius: 999px;
+            white-space: nowrap;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .cv-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
         }
 
         /* Intro */
@@ -192,25 +218,6 @@
             gap: 48px;
             align-items: center;
             padding: 96px 0 84px;
-        }
-
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 22px;
-        }
-
-        .status .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #22c55e;
-            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18);
         }
 
         .intro h1 {
@@ -250,6 +257,53 @@
         .photo:hover {
             filter: grayscale(0);
             transform: scale(1.02);
+        }
+
+        .cta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 0 0 22px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            padding: 11px 22px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            color: var(--text);
+            background: var(--card);
+            transition: transform 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--on-accent);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.92;
+        }
+
+        .facts {
+            font-size: 0.9rem;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .facts strong {
+            color: var(--text);
+            font-weight: 500;
         }
 
         /* Rows */
@@ -390,6 +444,24 @@
         }
 
         @media (max-width: 680px) {
+            .site-header .wrap {
+                gap: 10px;
+                padding-top: 12px;
+                padding-bottom: 12px;
+            }
+
+            .head-right {
+                gap: 12px;
+            }
+
+            .site-header nav {
+                gap: 14px;
+            }
+
+            .site-header nav a {
+                font-size: 0.78rem;
+            }
+
             .intro {
                 grid-template-columns: 1fr;
                 gap: 28px;
@@ -440,7 +512,12 @@
             "@context": "https://schema.org",
             "@type": "Person",
             "name": "David Ciria Mayordomo",
-            "jobTitle": "AI Security Engineer",
+            "jobTitle": "AI Pentester",
+            "hasOccupation": {
+                "@type": "Occupation",
+                "name": "AI Pentester",
+                "skills": "Penetration Testing, Ethical Hacking, AI Security, LLM Security"
+            },
             "worksFor": {
                 "@type": "Organization",
                 "name": "NeuralTrust",
@@ -479,13 +556,17 @@
     <header class="site-header">
         <div class="wrap">
             <a class="name" href="#top">David Ciria</a>
-            <nav>
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#projects">Projects</a>
-                <a href="#education">Education</a>
-                <a href="#contact">Contact</a>
-            </nav>
+            <div class="head-right">
+                <nav id="nav">
+                    <a href="#about">About</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#education">Education</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+                <a class="cv-btn" href="CV David Ciria (English).pdf" target="_blank" rel="noopener">Download CV</a>
+            </div>
         </div>
     </header>
 
@@ -493,16 +574,20 @@
 
         <section class="intro">
             <div>
-                <span class="status"><span class="dot"></span> Open to opportunities</span>
                 <h1>David Ciria Mayordomo</h1>
-                <p class="lead">AI Security Engineer at <a href="https://neuraltrust.ai" target="_blank"
-                        rel="noopener">NeuralTrust</a>, based in Barcelona. I work on securing AI agents and LLM
-                    applications, with a background in cybersecurity and full-stack engineering.</p>
-                <p class="links">
-                    <a href="mailto:davidciriamayo@gmail.com">Email</a>
+                <p class="lead">AI Pentester at <a href="https://neuraltrust.ai" target="_blank"
+                        rel="noopener">NeuralTrust</a>, based in Barcelona. I break — and help secure — AI agents and
+                    LLM applications, with a background in ethical hacking, cybersecurity and full-stack engineering.</p>
+                <div class="cta">
+                    <a class="btn btn-primary" href="CV David Ciria (English).pdf" target="_blank"
+                        rel="noopener">Download CV</a>
+                    <a class="btn" href="mailto:davidciriamayo@gmail.com">Get in touch</a>
+                </div>
+                <p class="facts"><strong>5 years in cybersecurity</strong> · Offensive security &amp; AI/LLM
+                    pentesting · MSc Cybersecurity, BSc Computer Engineering</p>
+                <p class="links" style="margin-top:20px">
                     <a href="https://www.linkedin.com/in/davidciria/" target="_blank" rel="noopener">LinkedIn</a>
                     <a href="https://github.com/davidciria" target="_blank" rel="noopener">GitHub</a>
-                    <a href="CV David Ciria (English).pdf" target="_blank" rel="noopener">CV</a>
                 </p>
             </div>
             <img class="photo" src="profile.jpg" alt="David Ciria Mayordomo" width="170" height="170">
@@ -514,9 +599,10 @@
                 <p>I've been fascinated by technology and computers since I was a child. That interest led me to a
                     degree in Computer Engineering and later to a Master's in Cybersecurity, where I focused on
                     protecting digital systems and data from cyber threats.</p>
-                <p>Today I work as an AI Security Engineer at NeuralTrust, helping secure the next generation of AI
-                    agents and LLM applications. Outside of work I enjoy building small projects, from serverless bots
-                    to augmented-reality experiments.</p>
+                <p>Today I work as an AI Pentester at NeuralTrust, red-teaming the next generation of AI agents and
+                    LLM applications. Before that I spent almost five years at Ackcent Cybersecurity, first as a
+                    developer and later as a pentester. Outside of work I enjoy building small projects, from
+                    serverless bots to augmented-reality experiments.</p>
             </div>
         </section>
 
@@ -525,19 +611,39 @@
             <div class="body">
                 <div class="entry">
                     <div class="entry-head">
-                        <h3>AI Security Engineer</h3>
-                        <span class="when">Present</span>
+                        <h3>AI Pentester</h3>
+                        <span class="when">Jun 2026 — Present</span>
                     </div>
-                    <p class="org">NeuralTrust · Barcelona</p>
-                    <p>Security for AI agents and LLM applications: runtime protection, prompt-injection and
-                        data-leakage defence, and guardrails for autonomous agents.</p>
-                    <p class="tech">AI Security · LLM Security · Agentic AI · Python</p>
+                    <p class="org">NeuralTrust · Full-time · Barcelona (Hybrid)</p>
+                    <p>Offensive security for AI: red teaming and penetration testing of LLM and agentic applications,
+                        probing prompt injection, guardrail bypasses and agent tool abuse.</p>
+                    <p class="tech">AI Security · LLM Security · Penetration Testing · Python</p>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-head">
+                        <h3>Pentester</h3>
+                        <span class="when">Nov 2024 — Jun 2026</span>
+                    </div>
+                    <p class="org">Ackcent Cybersecurity · Full-time · Barcelona</p>
+                    <p>Ethical hacking and penetration testing of applications, networks and cloud environments.</p>
+                    <p class="tech">Penetration Testing · Ethical Hacking · Web &amp; Cloud Security</p>
+                </div>
+
+                <div class="entry">
+                    <div class="entry-head">
+                        <h3>Developer</h3>
+                        <span class="when">Oct 2021 — Dec 2024</span>
+                    </div>
+                    <p class="org">Ackcent Cybersecurity · Full-time · Barcelona</p>
+                    <p>Software development, automation and internal tooling on the cloud.</p>
+                    <p class="tech">AWS · GitLab · Python</p>
                 </div>
 
                 <div class="entry">
                     <div class="entry-head">
                         <h3>Full-Stack Web Developer</h3>
-                        <span class="when">2019 — 2020</span>
+                        <span class="when">Oct 2019 — May 2020</span>
                     </div>
                     <p class="org">Universitat Pompeu Fabra (UPF) · Internship</p>
                     <p>Developed a full-stack web application, working across the whole stack from responsive
@@ -554,6 +660,47 @@
                     <p>Private maths tutoring, explaining complex concepts clearly and helping students build strong
                         problem-solving skills.</p>
                 </div>
+
+                <div class="entry">
+                    <div class="entry-head">
+                        <h3>Administrative Assistant</h3>
+                        <span class="when">Jul 2017</span>
+                    </div>
+                    <p class="org">Quadis · Barcelona</p>
+                    <p>Invoice classification and orders management.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="row" id="skills">
+            <div class="label">Skills</div>
+            <div class="body">
+                <dl class="stack">
+                    <div class="skill">
+                        <dt>Offensive Security</dt>
+                        <dd>Penetration Testing, Ethical Hacking, Web Application Security, Network Security</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>AI Security</dt>
+                        <dd>LLM Security, AI Agent Security, Prompt Injection, Red Teaming</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Development</dt>
+                        <dd>Python, JavaScript, Java, C++</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Web</dt>
+                        <dd>HTML, CSS, Angular, Vue.js, Node.js, MongoDB</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Cloud &amp; Tools</dt>
+                        <dd>AWS, GitLab</dd>
+                    </div>
+                    <div class="skill">
+                        <dt>Languages</dt>
+                        <dd>English (B2.2), Spanish (native), Catalan (native)</dd>
+                    </div>
+                </dl>
             </div>
         </section>
 
@@ -658,20 +805,13 @@
                         (2021) · SentinelOne Core Workshop (2021) · B2.2 English, UPF (2021) · Mobile App Development,
                         Google Actívate (2020)</p>
                 </div>
-
-                <div class="entry" style="margin-top:32px">
-                    <h3 style="font-size:1.02rem">Languages</h3>
-                    <p class="tech" style="margin-top:10px">English (B2.2, UPF Certificate) · Spanish (native) · Catalan
-                        (native)</p>
-                </div>
             </div>
         </section>
 
         <section class="row" id="contact">
             <div class="label">Contact</div>
             <div class="body">
-                <p>Open to opportunities, collaborations and interesting projects. The fastest way to reach me is by
-                    email.</p>
+                <p>For collaborations, projects or just a quick chat, the fastest way to reach me is by email.</p>
                 <p class="links">
                     <a href="mailto:davidciriamayo@gmail.com">davidciriamayo@gmail.com</a>
                     <a href="https://www.linkedin.com/in/davidciria/" target="_blank" rel="noopener">LinkedIn</a>
@@ -691,6 +831,29 @@
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Highlight the section currently in view
+        (function () {
+            var links = Array.prototype.slice.call(document.querySelectorAll("#nav a"));
+            var byId = {};
+            links.forEach(function (a) {
+                var id = a.getAttribute("href").slice(1);
+                var el = document.getElementById(id);
+                if (el) byId[id] = a;
+            });
+            if (!("IntersectionObserver" in window)) return;
+            var observer = new IntersectionObserver(function (entries) {
+                entries.forEach(function (entry) {
+                    if (!entry.isIntersecting) return;
+                    links.forEach(function (a) { a.classList.remove("active"); });
+                    var a = byId[entry.target.id];
+                    if (a) a.classList.add("active");
+                });
+            }, { rootMargin: "-45% 0px -50% 0px" });
+            Object.keys(byId).forEach(function (id) {
+                observer.observe(document.getElementById(id));
+            });
+        })();
     </script>
 </body>
 
