@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
         rel="stylesheet">
 
     <style>
@@ -137,7 +137,7 @@
         h3 {
             margin: 0;
             font-family: "Newsreader", Georgia, serif;
-            font-weight: 400;
+            font-weight: 500;
             line-height: 1.2;
             letter-spacing: -0.01em;
         }
@@ -156,7 +156,6 @@
         .site-header .wrap {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             gap: 20px;
             flex-wrap: wrap;
             padding-top: 14px;
@@ -222,6 +221,45 @@
             transform: scaleX(1);
         }
 
+        .head-right {
+            display: flex;
+            align-items: center;
+            gap: 22px;
+            margin-left: auto;
+            flex-wrap: wrap;
+        }
+
+        .langs {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .langs button {
+            border: 0;
+            background: none;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.76rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            padding: 5px 7px;
+            border-radius: 7px;
+            transition: color 0.15s ease, background 0.15s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .langs button:hover {
+            color: var(--text);
+            background: color-mix(in srgb, var(--muted) 12%, transparent);
+        }
+
+        .langs button.active {
+            color: var(--accent);
+            background: var(--accent-soft);
+        }
+
         .menu-toggle {
             display: none;
             flex-direction: column;
@@ -268,6 +306,7 @@
 
         .intro h1 {
             font-size: clamp(2.3rem, 6vw, 3.3rem);
+            font-weight: 600;
             margin-bottom: 22px;
         }
 
@@ -367,7 +406,7 @@
             text-transform: uppercase;
             letter-spacing: 0.14em;
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
             padding-top: 6px;
         }
 
@@ -415,6 +454,7 @@
 
         .entry-head h3 {
             font-size: 1.18rem;
+            font-weight: 600;
         }
 
         .when {
@@ -673,20 +713,27 @@
     <header class="site-header">
         <div class="wrap">
             <a class="name" href="#top">David Ciria</a>
+            <div class="head-right">
+                <nav id="nav" aria-label="Primary">
+                    <a href="#about" data-ca="Sobre mi" data-es="Sobre mí">About</a>
+                    <a href="#experience" data-ca="Experiència" data-es="Experiencia">Experience</a>
+                    <a href="#skills" data-ca="Habilitats" data-es="Habilidades">Skills</a>
+                    <a href="#projects" data-ca="Projectes" data-es="Proyectos">Projects</a>
+                    <a href="#education" data-ca="Formació" data-es="Formación">Education</a>
+                    <a href="#contact" data-ca="Contacte" data-es="Contacto">Contact</a>
+                </nav>
+                <div class="langs" role="group" aria-label="Language">
+                    <button type="button" data-lang="en" aria-pressed="true">EN</button>
+                    <button type="button" data-lang="ca" aria-pressed="false">CA</button>
+                    <button type="button" data-lang="es" aria-pressed="false">ES</button>
+                </div>
+            </div>
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-controls="nav"
                 aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
-            <nav id="nav" aria-label="Primary">
-                <a href="#about">About</a>
-                <a href="#experience">Experience</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#education">Education</a>
-                <a href="#contact">Contact</a>
-            </nav>
         </div>
     </header>
 
@@ -695,44 +742,59 @@
         <section class="intro">
             <div>
                 <h1>David Ciria Mayordomo</h1>
-                <p class="lead">AI Pentester at <a href="https://neuraltrust.ai" target="_blank"
-                        rel="noopener">NeuralTrust</a>, based in Barcelona. I break and help secure AI agents and
-                    LLM applications, with a background in ethical hacking, cybersecurity and full-stack engineering.</p>
+                <p class="lead"
+                    data-ca='AI Pentester a <a href="https://neuraltrust.ai" target="_blank" rel="noopener">NeuralTrust</a>, amb seu a Barcelona. Trenco i ajudo a protegir agents d&rsquo;IA i aplicacions LLM, amb base en hacking ètic, ciberseguretat i desenvolupament full-stack.'
+                    data-es='AI Pentester en <a href="https://neuraltrust.ai" target="_blank" rel="noopener">NeuralTrust</a>, con sede en Barcelona. Rompo y ayudo a proteger agentes de IA y aplicaciones LLM, con formación en hacking ético, ciberseguridad y desarrollo full-stack.'>
+                    AI Pentester at <a href="https://neuraltrust.ai" target="_blank" rel="noopener">NeuralTrust</a>, based
+                    in Barcelona. I break and help secure AI agents and LLM applications, with a background in ethical
+                    hacking, cybersecurity and full-stack engineering.</p>
                 <div class="cta">
-                    <a class="btn btn-primary" href="mailto:davidciriamayo@gmail.com">Get in touch</a>
+                    <a class="btn btn-primary" href="mailto:davidciriamayo@gmail.com" data-ca="Posa't en contacte"
+                        data-es="Contáctame">Get in touch</a>
                     <a class="btn" href="https://www.linkedin.com/in/davidciria/" target="_blank"
                         rel="noopener">LinkedIn</a>
                     <a class="btn" href="https://github.com/davidciria" target="_blank" rel="noopener">GitHub</a>
                 </div>
-                <p class="facts"><strong>5 years in cybersecurity</strong> · Offensive security &amp; AI/LLM
-                    pentesting · MSc Cybersecurity, BSc Computer Engineering</p>
+                <p class="facts"
+                    data-ca="<strong>5 anys en ciberseguretat</strong> · Seguretat ofensiva i pentesting d'IA/LLM · Màster en Ciberseguretat, Grau en Enginyeria Informàtica"
+                    data-es="<strong>5 años en ciberseguridad</strong> · Seguridad ofensiva y pentesting de IA/LLM · Máster en Ciberseguridad, Grado en Ingeniería Informática">
+                    <strong>5 years in cybersecurity</strong> · Offensive security &amp; AI/LLM pentesting · MSc
+                    Cybersecurity, BSc Computer Engineering</p>
             </div>
             <img class="photo" src="profile-2026.jpg?v=3" alt="David Ciria Mayordomo" width="170" height="170">
         </section>
 
         <section class="row" id="about">
-            <div class="label">About</div>
+            <div class="label" data-ca="Sobre mi" data-es="Sobre mí">About</div>
             <div class="body">
-                <p>I'm an AI Pentester at NeuralTrust, red-teaming the next generation of AI agents and LLM
+                <p data-ca="Sóc AI Pentester a NeuralTrust, fent red teaming de la nova generació d'agents d'IA i aplicacions LLM. El meu camí a la seguretat va començar amb el Grau en Enginyeria Informàtica i un Màster en Ciberseguretat a la UPC, on la meva tesi va explorar l'emulació d'adversaris contra amenaces persistents avançades al sector financer."
+                    data-es="Soy AI Pentester en NeuralTrust, haciendo red teaming de la nueva generación de agentes de IA y aplicaciones LLM. Mi camino en la seguridad empezó con el Grado en Ingeniería Informática y un Máster en Ciberseguridad en la UPC, donde mi tesis exploró la emulación de adversarios contra amenazas persistentes avanzadas en el sector financiero.">
+                    I'm an AI Pentester at NeuralTrust, red-teaming the next generation of AI agents and LLM
                     applications. My path into security started with a degree in Computer Engineering and a Master's in
                     Cybersecurity at UPC, where my thesis explored adversary emulation against advanced persistent
                     threats in the financial sector.</p>
-                <p>Before NeuralTrust I spent almost five years at Ackcent Cybersecurity, first as a developer and
+                <p data-ca="Abans de NeuralTrust vaig passar gairebé cinc anys a Ackcent Cybersecurity, primer com a desenvolupador i després com a pentester, fent més de 50 auditories d'aplicacions web per a empreses líders europees. Fora de la feina construeixo petits projectes i experimento amb noves tecnologies."
+                    data-es="Antes de NeuralTrust pasé casi cinco años en Ackcent Cybersecurity, primero como desarrollador y después como pentester, realizando más de 50 auditorías de aplicaciones web para empresas líderes europeas. Fuera del trabajo construyo pequeños proyectos y experimento con nuevas tecnologías.">
+                    Before NeuralTrust I spent almost five years at Ackcent Cybersecurity, first as a developer and
                     later as a pentester, running 50+ web application audits for leading European companies. Outside of
                     work I build small projects and experiment with new technologies.</p>
             </div>
         </section>
 
         <section class="row" id="experience">
-            <div class="label">Experience</div>
+            <div class="label" data-ca="Experiència" data-es="Experiencia">Experience</div>
             <div class="body">
                 <div class="entry">
                     <div class="entry-head">
                         <h3>AI Pentester</h3>
-                        <span class="when">Jun 2026 — Present</span>
+                        <span class="when" data-ca="juny 2026 — Actualitat" data-es="jun. 2026 — Actualidad">Jun 2026 — Present</span>
                     </div>
-                    <p class="org">NeuralTrust · Full-time · Barcelona (Hybrid)</p>
-                    <p>Offensive security for AI: red teaming and penetration testing of LLM and agentic applications,
+                    <p class="org" data-ca="NeuralTrust · Jornada completa · Barcelona (Híbrid)"
+                        data-es="NeuralTrust · Jornada completa · Barcelona (Híbrido)">NeuralTrust · Full-time · Barcelona
+                        (Hybrid)</p>
+                    <p data-ca="Seguretat ofensiva per a IA: red teaming i pentesting d'aplicacions LLM i agentives, provant prompt injection, elusió de guardrails i abús d'eines dels agents."
+                        data-es="Seguridad ofensiva para IA: red teaming y pentesting de aplicaciones LLM y agénticas, probando prompt injection, evasión de guardrails y abuso de herramientas de los agentes.">
+                        Offensive security for AI: red teaming and penetration testing of LLM and agentic applications,
                         probing prompt injection, guardrail bypasses and agent tool abuse.</p>
                     <p class="tech">AI Security · LLM Security · Penetration Testing · Python</p>
                 </div>
@@ -740,70 +802,90 @@
                 <div class="entry">
                     <div class="entry-head">
                         <h3>Pentester</h3>
-                        <span class="when">Nov 2024 — Jun 2026</span>
+                        <span class="when" data-ca="nov. 2024 — juny 2026" data-es="nov. 2024 — jun. 2026">Nov 2024 — Jun 2026</span>
                     </div>
-                    <p class="org">Ackcent Cybersecurity · Full-time · Barcelona</p>
-                    <p>Ethical hacking and penetration testing of web applications, networks and cloud environments,
+                    <p class="org" data-ca="Ackcent Cybersecurity · Jornada completa · Barcelona"
+                        data-es="Ackcent Cybersecurity · Jornada completa · Barcelona">Ackcent Cybersecurity · Full-time ·
+                        Barcelona</p>
+                    <p data-ca="Hacking ètic i pentesting d'aplicacions web, xarxes i entorns cloud, amb més de 50 auditories d'aplicacions web per a empreses líders europees."
+                        data-es="Hacking ético y pentesting de aplicaciones web, redes y entornos cloud, realizando más de 50 auditorías de aplicaciones web para empresas líderes europeas.">
+                        Ethical hacking and penetration testing of web applications, networks and cloud environments,
                         delivering 50+ web application audits for leading European companies.</p>
                     <p class="tech">Penetration Testing · Ethical Hacking · Web &amp; Cloud Security</p>
                 </div>
 
                 <div class="entry">
                     <div class="entry-head">
-                        <h3>Developer</h3>
-                        <span class="when">Oct 2021 — Dec 2024</span>
+                        <h3 data-ca="Desenvolupador" data-es="Desarrollador">Developer</h3>
+                        <span class="when" data-ca="oct. 2021 — des. 2024" data-es="oct. 2021 — dic. 2024">Oct 2021 — Dec 2024</span>
                     </div>
-                    <p class="org">Ackcent Cybersecurity · Full-time · Barcelona</p>
-                    <p>Software development, automation and internal tooling on the cloud.</p>
+                    <p class="org" data-ca="Ackcent Cybersecurity · Jornada completa · Barcelona"
+                        data-es="Ackcent Cybersecurity · Jornada completa · Barcelona">Ackcent Cybersecurity · Full-time ·
+                        Barcelona</p>
+                    <p data-ca="Desenvolupament de programari, automatització i eines internes al cloud."
+                        data-es="Desarrollo de software, automatización y herramientas internas en la nube.">Software
+                        development, automation and internal tooling on the cloud.</p>
                     <p class="tech">AWS · Docker · GitLab · Python</p>
                 </div>
 
                 <div class="entry">
                     <div class="entry-head">
-                        <h3>Full-Stack Web Developer</h3>
-                        <span class="when">Oct 2019 — May 2020</span>
+                        <h3 data-ca="Desenvolupador Web Full-Stack" data-es="Desarrollador Web Full-Stack">Full-Stack Web
+                            Developer</h3>
+                        <span class="when" data-ca="oct. 2019 — maig 2020" data-es="oct. 2019 — may. 2020">Oct 2019 — May 2020</span>
                     </div>
-                    <p class="org">Universitat Pompeu Fabra (UPF) · Internship</p>
-                    <p>Developed a full-stack web application, working across the whole stack from responsive
+                    <p class="org" data-ca="Universitat Pompeu Fabra (UPF) · Pràctiques"
+                        data-es="Universitat Pompeu Fabra (UPF) · Prácticas">Universitat Pompeu Fabra (UPF) · Internship</p>
+                    <p data-ca="Vaig desenvolupar una aplicació web full-stack, treballant tot l'stack, des d'interfícies responsives fins a APIs i persistència de dades."
+                        data-es="Desarrollé una aplicación web full-stack, trabajando todo el stack, desde interfaces responsivas hasta APIs y persistencia de datos.">
+                        Developed a full-stack web application, working across the whole stack from responsive
                         interfaces to APIs and data persistence.</p>
                     <p class="tech">Angular · Node.js · MongoDB</p>
                 </div>
 
                 <div class="entry">
                     <div class="entry-head">
-                        <h3>Maths Teacher</h3>
+                        <h3 data-ca="Professor de Matemàtiques" data-es="Profesor de Matemáticas">Maths Teacher</h3>
                         <span class="when">2017 — 2021</span>
                     </div>
-                    <p class="org">Private Tutoring</p>
-                    <p>Private maths tutoring, explaining complex concepts clearly and helping students build strong
+                    <p class="org" data-ca="Classes particulars" data-es="Clases particulares">Private Tutoring</p>
+                    <p data-ca="Classes particulars de matemàtiques, explicant conceptes complexos amb claredat i ajudant els alumnes a desenvolupar bones habilitats de resolució de problemes."
+                        data-es="Clases particulares de matemáticas, explicando conceptos complejos con claridad y ayudando a los alumnos a desarrollar sólidas habilidades de resolución de problemas.">
+                        Private maths tutoring, explaining complex concepts clearly and helping students build strong
                         problem-solving skills.</p>
                 </div>
 
                 <div class="entry">
                     <div class="entry-head">
-                        <h3>Administrative Assistant</h3>
-                        <span class="when">Jul 2017</span>
+                        <h3 data-ca="Auxiliar Administratiu" data-es="Auxiliar Administrativo">Administrative Assistant</h3>
+                        <span class="when" data-ca="jul. 2017" data-es="jul. 2017">Jul 2017</span>
                     </div>
                     <p class="org">Quadis · Barcelona</p>
-                    <p>Invoice classification and orders management.</p>
+                    <p data-ca="Classificació de factures i gestió de comandes."
+                        data-es="Clasificación de facturas y gestión de pedidos.">Invoice classification and orders
+                        management.</p>
                 </div>
             </div>
         </section>
 
         <section class="row" id="skills">
-            <div class="label">Skills</div>
+            <div class="label" data-ca="Habilitats" data-es="Habilidades">Skills</div>
             <div class="body">
                 <dl class="stack">
                     <div class="skill">
-                        <dt>Offensive Security</dt>
-                        <dd>Penetration Testing, Ethical Hacking, Web Application Security, Network Security</dd>
+                        <dt data-ca="Seguretat ofensiva" data-es="Seguridad ofensiva">Offensive Security</dt>
+                        <dd data-ca="Pentesting, Hacking ètic, Seguretat d'aplicacions web, Seguretat de xarxes"
+                            data-es="Pentesting, Hacking ético, Seguridad de aplicaciones web, Seguridad de redes">
+                            Penetration Testing, Ethical Hacking, Web Application Security, Network Security</dd>
                     </div>
                     <div class="skill">
-                        <dt>AI Security</dt>
-                        <dd>LLM Security, AI Agent Security, Prompt Injection, Red Teaming</dd>
+                        <dt data-ca="Seguretat en IA" data-es="Seguridad en IA">AI Security</dt>
+                        <dd data-ca="Seguretat LLM, Seguretat d'agents d'IA, Prompt Injection, Red Teaming"
+                            data-es="Seguridad LLM, Seguridad de agentes de IA, Prompt Injection, Red Teaming">LLM
+                            Security, AI Agent Security, Prompt Injection, Red Teaming</dd>
                     </div>
                     <div class="skill">
-                        <dt>Development</dt>
+                        <dt data-ca="Desenvolupament" data-es="Desarrollo">Development</dt>
                         <dd>Python, JavaScript, Java, C++</dd>
                     </div>
                     <div class="skill">
@@ -811,26 +893,30 @@
                         <dd>HTML, CSS, Angular, Vue.js, Node.js, MongoDB</dd>
                     </div>
                     <div class="skill">
-                        <dt>Cloud &amp; Tools</dt>
+                        <dt data-ca="Cloud i eines" data-es="Cloud y herramientas">Cloud &amp; Tools</dt>
                         <dd>AWS, Docker, GitLab</dd>
                     </div>
                     <div class="skill">
-                        <dt>Languages</dt>
-                        <dd>English (B2.2), Spanish (native), Catalan (native)</dd>
+                        <dt data-ca="Idiomes" data-es="Idiomas">Languages</dt>
+                        <dd data-ca="Anglès (B2.2), Castellà (natiu), Català (natiu)"
+                            data-es="Inglés (B2.2), Español (nativo), Catalán (nativo)">English (B2.2), Spanish (native),
+                            Catalan (native)</dd>
                     </div>
                 </dl>
             </div>
         </section>
 
         <section class="row" id="projects">
-            <div class="label">Projects</div>
+            <div class="label" data-ca="Projectes" data-es="Proyectos">Projects</div>
             <div class="body">
                 <div class="entry">
                     <div class="entry-head">
                         <h3>Cubelles Surf Bot</h3>
                         <span class="when">2022</span>
                     </div>
-                    <p>Telegram bot that predicts the surf waves of Cubelles (Barcelona), running fully serverless on
+                    <p data-ca="Bot de Telegram que prediu les onades de surf de Cubelles (Barcelona), totalment serverless a AWS. <a href=&quot;https://github.com/davidciria/cubelles-surf-bot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Bot de Telegram que predice las olas de surf de Cubelles (Barcelona), totalmente serverless en AWS. <a href=&quot;https://github.com/davidciria/cubelles-surf-bot&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        Telegram bot that predicts the surf waves of Cubelles (Barcelona), running fully serverless on
                         AWS. <a href="https://github.com/davidciria/cubelles-surf-bot" target="_blank"
                             rel="noopener">GitHub</a></p>
                     <p class="tech">AWS Lambda · Python · EventBridge · CloudWatch</p>
@@ -841,7 +927,9 @@
                         <h3>Cave Escape</h3>
                         <span class="when">2021</span>
                     </div>
-                    <p>3D augmented-reality video game where the player is controlled through webcam motion tracking.
+                    <p data-ca="Videojoc 3D de realitat augmentada on el jugador es controla amb seguiment de moviment per webcam. <a href=&quot;https://github.com/angelhd1999/EscapeRoomProject&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Videojuego 3D de realidad aumentada donde el jugador se controla mediante seguimiento de movimiento por webcam. <a href=&quot;https://github.com/angelhd1999/EscapeRoomProject&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        3D augmented-reality video game where the player is controlled through webcam motion tracking.
                         <a href="https://github.com/angelhd1999/EscapeRoomProject" target="_blank"
                             rel="noopener">GitHub</a>
                     </p>
@@ -853,7 +941,9 @@
                         <h3>Fanmatch</h3>
                         <span class="when">2021</span>
                     </div>
-                    <p>3D virtual environment to watch live sports events collectively and in real time. <a
+                    <p data-ca="Entorn virtual 3D per veure esdeveniments esportius en directe de manera col·lectiva i en temps real. <a href=&quot;https://github.com/davidciria/fanmatch&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Entorno virtual 3D para ver eventos deportivos en directo de forma colectiva y en tiempo real. <a href=&quot;https://github.com/davidciria/fanmatch&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        3D virtual environment to watch live sports events collectively and in real time. <a
                             href="https://github.com/davidciria/fanmatch" target="_blank" rel="noopener">GitHub</a></p>
                     <p class="tech">HTML · CSS · JavaScript · three.js</p>
                 </div>
@@ -863,7 +953,9 @@
                         <h3>Politikeo</h3>
                         <span class="when">2020</span>
                     </div>
-                    <p>Twitter bot that predicts your political identity from your activity on the social network. <a
+                    <p data-ca="Bot de Twitter que prediu la teva identitat política a partir de la teva activitat a la xarxa social. <a href=&quot;https://github.com/davidciria/Politikeo&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Bot de Twitter que predice tu identidad política a partir de tu actividad en la red social. <a href=&quot;https://github.com/davidciria/Politikeo&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        Twitter bot that predicts your political identity from your activity on the social network. <a
                             href="https://github.com/davidciria/Politikeo" target="_blank" rel="noopener">GitHub</a></p>
                     <p class="tech">Python · FastText · NLP</p>
                 </div>
@@ -873,7 +965,9 @@
                         <h3>Sharlay</h3>
                         <span class="when">2020</span>
                     </div>
-                    <p>A Twitter-style social network built for gamers. <a href="https://github.com/davidciria/Sharlay"
+                    <p data-ca="Una xarxa social a l'estil de Twitter pensada per a gamers. <a href=&quot;https://github.com/davidciria/Sharlay&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Una red social al estilo de Twitter pensada para gamers. <a href=&quot;https://github.com/davidciria/Sharlay&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        A Twitter-style social network built for gamers. <a href="https://github.com/davidciria/Sharlay"
                             target="_blank" rel="noopener">GitHub</a></p>
                     <p class="tech">Java · Apache Tomcat · MySQL</p>
                 </div>
@@ -883,8 +977,10 @@
                         <h3>Easy Zone</h3>
                         <span class="when">2018</span>
                     </div>
-                    <p>Parking manager built at the Tecnocampus Mataró hackathon, with real-time maps for blue zones and
-                        loading areas. <a href="https://github.com/SomHackathon18/somhackathon18-easyzone"
+                    <p data-ca="Gestor d'aparcament creat al hackathon del Tecnocampus Mataró, amb mapes en temps real per a zones blaves i àrees de càrrega i descàrrega. <a href=&quot;https://github.com/SomHackathon18/somhackathon18-easyzone&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                        data-es="Gestor de aparcamiento creado en el hackathon del Tecnocampus Mataró, con mapas en tiempo real para zonas azules y áreas de carga y descarga. <a href=&quot;https://github.com/SomHackathon18/somhackathon18-easyzone&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                        Parking manager built at the Tecnocampus Mataró hackathon, with real-time maps for blue zones
+                        and loading areas. <a href="https://github.com/SomHackathon18/somhackathon18-easyzone"
                             target="_blank" rel="noopener">GitHub</a></p>
                     <p class="tech">Node.js · MongoDB · Socket.IO</p>
                 </div>
@@ -892,48 +988,63 @@
         </section>
 
         <section class="row" id="education">
-            <div class="label">Education</div>
+            <div class="label" data-ca="Formació" data-es="Formación">Education</div>
             <div class="body">
                 <div class="stack">
                     <div class="entry">
                         <div class="entry-head">
-                            <h3>Master's Degree in Cybersecurity</h3>
+                            <h3 data-ca="Màster en Ciberseguretat" data-es="Máster en Ciberseguridad">Master's Degree in
+                                Cybersecurity</h3>
                             <span class="when">2022 — 2024</span>
                         </div>
-                        <p class="org">Universitat Politècnica de Catalunya (UPC) · Digital systems and data protection</p>
-                        <p>Thesis: open-source solutions against advanced persistent threats in the financial sector. <a
+                        <p class="org"
+                            data-ca="Universitat Politècnica de Catalunya (UPC) · Sistemes digitals i protecció de dades"
+                            data-es="Universitat Politècnica de Catalunya (UPC) · Sistemas digitales y protección de datos">
+                            Universitat Politècnica de Catalunya (UPC) · Digital systems and data protection</p>
+                        <p data-ca="Tesi: solucions de codi obert contra amenaces persistents avançades al sector financer. <a href=&quot;https://github.com/davidciria/TFM-Open-Source-Financial-APT&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>"
+                            data-es="Tesis: soluciones de código abierto contra amenazas persistentes avanzadas en el sector financiero. <a href=&quot;https://github.com/davidciria/TFM-Open-Source-Financial-APT&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;>GitHub</a>">
+                            Thesis: open-source solutions against advanced persistent threats in the financial sector. <a
                                 href="https://github.com/davidciria/TFM-Open-Source-Financial-APT" target="_blank"
                                 rel="noopener">GitHub</a></p>
                     </div>
                     <div class="entry">
                         <div class="entry-head">
-                            <h3>Bachelor's Degree in Computer Engineering</h3>
+                            <h3 data-ca="Grau en Enginyeria Informàtica" data-es="Grado en Ingeniería Informática">
+                                Bachelor's Degree in Computer Engineering</h3>
                             <span class="when">2017 — 2021</span>
                         </div>
                         <p class="org">Universitat Pompeu Fabra (UPF)</p>
                     </div>
                     <div class="entry">
                         <div class="entry-head">
-                            <h3>Technological Baccalaureate</h3>
+                            <h3 data-ca="Batxillerat Tecnològic" data-es="Bachillerato Tecnológico">Technological
+                                Baccalaureate</h3>
                             <span class="when">2015 — 2017</span>
                         </div>
-                        <p class="org">Escola Gravi · With honors · Physics, Technology and Technical Drawing</p>
+                        <p class="org"
+                            data-ca="Escola Gravi · Amb matrícula d'honor · Física, Tecnologia i Dibuix Tècnic"
+                            data-es="Escola Gravi · Con matrícula de honor · Física, Tecnología y Dibujo Técnico">Escola
+                            Gravi · With honors · Physics, Technology and Technical Drawing</p>
                     </div>
                 </div>
 
                 <div class="entry certs">
-                    <h3>Certifications</h3>
-                    <p class="tech">Sumo Logic Search Mastery (2021) · Sumo Logic Fundamentals
-                        (2021) · SentinelOne Core Workshop (2021) · B2.2 English, UPF (2021) · Mobile App Development,
-                        Google Actívate (2020)</p>
+                    <h3 data-ca="Certificacions" data-es="Certificaciones">Certifications</h3>
+                    <p class="tech"
+                        data-ca="Sumo Logic Search Mastery (2021) · Sumo Logic Fundamentals (2021) · SentinelOne Core Workshop (2021) · Anglès B2.2, UPF (2021) · Desenvolupament d'Apps Mòbils, Google Actívate (2020)"
+                        data-es="Sumo Logic Search Mastery (2021) · Sumo Logic Fundamentals (2021) · SentinelOne Core Workshop (2021) · Inglés B2.2, UPF (2021) · Desarrollo de Apps Móviles, Google Actívate (2020)">
+                        Sumo Logic Search Mastery (2021) · Sumo Logic Fundamentals (2021) · SentinelOne Core Workshop
+                        (2021) · B2.2 English, UPF (2021) · Mobile App Development, Google Actívate (2020)</p>
                 </div>
             </div>
         </section>
 
         <section class="row" id="contact">
-            <div class="label">Contact</div>
+            <div class="label" data-ca="Contacte" data-es="Contacto">Contact</div>
             <div class="body">
-                <p>For collaborations, projects or just a quick chat, the fastest way to reach me is by email.</p>
+                <p data-ca="Per a col·laboracions, projectes o simplement xerrar una estona, la via més ràpida per contactar amb mi és el correu electrònic."
+                    data-es="Para colaboraciones, proyectos o simplemente charlar un rato, la forma más rápida de contactarme es por correo electrónico.">
+                    For collaborations, projects or just a quick chat, the fastest way to reach me is by email.</p>
                 <p class="links">
                     <a href="mailto:davidciriamayo@gmail.com">davidciriamayo@gmail.com</a>
                     <a href="https://www.linkedin.com/in/davidciria/" target="_blank" rel="noopener">LinkedIn</a>
@@ -947,7 +1058,7 @@
     <footer>
         <div class="wrap">
             <span>© <span id="year">2026</span> David Ciria Mayordomo</span>
-            <a href="#top">Back to top ↑</a>
+            <a href="#top" data-ca="Torna a dalt ↑" data-es="Volver arriba ↑">Back to top ↑</a>
         </div>
     </footer>
 
@@ -955,6 +1066,36 @@
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+
+        // Language switcher (English by default)
+        (function () {
+            var codes = ["en", "ca", "es"];
+            var nodes = Array.prototype.slice.call(document.querySelectorAll("[data-ca]"));
+            nodes.forEach(function (el) {
+                el.setAttribute("data-en", el.innerHTML);
+            });
+            var buttons = Array.prototype.slice.call(document.querySelectorAll(".langs button"));
+            function apply(lang) {
+                if (codes.indexOf(lang) === -1) lang = "en";
+                document.documentElement.setAttribute("lang", lang);
+                nodes.forEach(function (el) {
+                    var value = el.getAttribute("data-" + lang);
+                    if (value !== null) el.innerHTML = value;
+                });
+                buttons.forEach(function (b) {
+                    var on = b.getAttribute("data-lang") === lang;
+                    b.classList.toggle("active", on);
+                    b.setAttribute("aria-pressed", on ? "true" : "false");
+                });
+                try { localStorage.setItem("lang", lang); } catch (e) { }
+            }
+            buttons.forEach(function (b) {
+                b.addEventListener("click", function () { apply(b.getAttribute("data-lang")); });
+            });
+            var saved = "en";
+            try { saved = localStorage.getItem("lang") || "en"; } catch (e) { }
+            apply(saved);
+        })();
 
         // Mobile navigation menu
         (function () {
