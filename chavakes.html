@@ -3,204 +3,541 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-  <title>🏆 Chavakes 🏀⚽</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#06140e">
+  <title>🎄 Chavakes Premium</title>
   <style>
-    /* === ESTILOS MODERNOS MOLONES === */
+    :root {
+      --night: #06140e;
+      --pine: #0d2b1f;
+      --pine-2: #123a2a;
+      --holly: #c1121f;
+      --holly-2: #e63946;
+      --gold: #f4c95d;
+      --gold-2: #ffd166;
+      --snow: #f7fbf8;
+      --muted: #a8c0b3;
+      --ice: #9ad1d4;
+      --radius: 20px;
+      --shadow: 0 18px 40px rgba(0, 0, 0, .35);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-      color: #f0f0f0;
-      padding: 20px;
       margin: 0;
+      min-height: 100vh;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--snow);
+      background:
+        radial-gradient(1200px 600px at 50% -10%, rgba(244, 201, 93, .12), transparent 60%),
+        radial-gradient(900px 500px at 100% 20%, rgba(193, 18, 31, .10), transparent 60%),
+        linear-gradient(160deg, #04110b 0%, var(--night) 40%, #0a2117 100%);
+      overflow-x: hidden;
     }
 
-    h2 {
-      color: #ffffff;
-      margin-bottom: 15px;
-      text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.6);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(rgba(255, 255, 255, .06) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    input,
-    button {
-      margin: 10px;
-      padding: 12px 18px;
-      font-size: 16px;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-    }
-
-    input {
-      width: 220px;
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+    /* ❄️ Nieve */
+    .snowflake {
+      position: fixed;
+      top: -5vh;
+      z-index: 0;
       color: #fff;
-      backdrop-filter: blur(8px);
+      opacity: .7;
+      pointer-events: none;
+      user-select: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
     }
 
-    input::placeholder {
-      color: #e0e0e0;
+    @keyframes fall {
+      0%   { transform: translate3d(0, -10vh, 0) rotate(0deg); }
+      100% { transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(360deg); }
     }
 
-    button {
-      background: linear-gradient(135deg, #28a745, #1d7d34);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.3);
+    @keyframes sway {
+      0%, 100% { transform: rotate(-3deg); }
+      50%      { transform: rotate(3deg); }
     }
 
-    button:hover {
-      transform: scale(1.05);
-      background: linear-gradient(135deg, #34c759, #248f42);
+    /* 🎄 Cabecera */
+    .hero {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 54px 20px 26px;
     }
 
-    #downloadLink {
+    .hero .tree {
+      display: flex;
+      justify-content: center;
+      filter: drop-shadow(0 0 18px rgba(244, 201, 93, .35));
+      animation: sway 4s ease-in-out infinite;
+    }
+
+    .hero .tree svg {
+      width: 104px;
+      height: auto;
       display: block;
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
-      text-decoration: none;
-      color: #34c3ff;
-      transition: color 0.3s ease;
     }
 
-    #downloadLink:hover {
-      color: #ffffff;
+    .hero h1 {
+      margin: 8px 0 6px;
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      letter-spacing: .5px;
     }
 
-    #fileContent {
-      overflow-wrap: break-word;
-      padding: 20px;
-      margin-top: 20px;
-      border-radius: 20px;
-      display: none;
-      background: rgba(255, 255, 255, 0.08);
+    .hero h1 span {
+      color: var(--gold);
+      text-shadow: 0 0 24px rgba(244, 201, 93, .35);
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .candy-line {
+      width: min(320px, 80%);
+      height: 6px;
+      margin: 18px auto 0;
+      border-radius: 999px;
+      background: repeating-linear-gradient(90deg, var(--holly) 0 14px, #fff 14px 28px);
+      opacity: .8;
+    }
+
+    /* 📦 Contenido */
+    main {
+      position: relative;
+      z-index: 1;
+      width: min(1100px, 100% - 32px);
+      margin: 0 auto 60px;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .07), rgba(255, 255, 255, .03));
+      border: 1px solid rgba(244, 201, 93, .18);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
       backdrop-filter: blur(10px);
-      box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4);
     }
 
- .channel-card {
-  background: rgba(30, 30, 30, 0.85); /* Fondo oscuro semitransparente */
-  border-radius: 15px;
-  padding: 20px;
-  margin: 15px;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transition: all 0.3s ease;
-  backdrop-filter: blur(12px);
-  color: #f0f0f0; /* Texto claro */
-}
+    .unlock-card { margin-top: 8px; }
 
-.channel-card:hover {
-  transform: translateY(-5px) scale(1.03);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.6);
-}
-
-.channel-card h3 {
-  margin: 5px 0;
-  font-size: 20px;
-  color: #ffffff; /* Blanco para los títulos */
-}
-
-.channel-card a {
-  color: #3ec7ff; /* Azul brillante para el enlace */
-  text-decoration: none;
-  font-weight: bold;
-  word-break: break-all;
-}
-
-.channel-card a:hover {
-  text-decoration: underline;
-  color: #00ff9d; /* Verde fosfo al pasar el ratón */
-}
-
-    .channel-logo {
-      max-height: 70px;
-      max-width: 70px;
-      border-radius: 10px;
+    .unlock-card label {
+      display: block;
+      font-weight: 700;
+      color: var(--gold);
       margin-bottom: 10px;
-      border: 2px solid #ffffff33;
     }
 
-    .channel-info {
+    .unlock-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .unlock-row input { flex: 1 1 240px; }
+
+    input[type="password"],
+    input[type="search"] {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      background: rgba(0, 0, 0, .25);
+      color: var(--snow);
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    input::placeholder { color: rgba(247, 251, 248, .45); }
+
+    input:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(244, 201, 93, .18);
+    }
+
+    /* 🎅 Botones */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-family: inherit;
+      font-size: .98rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .btn:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--holly-2), var(--holly));
+      color: #fff;
+      box-shadow: 0 10px 24px rgba(230, 57, 70, .28);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(230, 57, 70, .4);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #241a00;
+      box-shadow: 0 10px 24px rgba(244, 201, 93, .22);
+    }
+
+    .btn-secondary:hover { transform: translateY(-2px); }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, .06);
+      border-color: rgba(255, 255, 255, .16);
+      color: var(--snow);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(255, 255, 255, .12);
+      transform: translateY(-1px);
+    }
+
+    .btn-play {
+      background: linear-gradient(135deg, #2a9d8f, #1f7a6f);
+      color: #fff;
+    }
+
+    .btn-play:hover { transform: translateY(-1px); }
+
+    /* 💬 Estado */
+    .status {
+      min-height: 1.4em;
+      margin: 14px 2px 0;
+      font-size: .95rem;
+      color: var(--muted);
+    }
+
+    .status.ok { color: #7ee2b8; }
+    .status.error { color: #ff9aa2; }
+
+    /* 🔎 Buscador */
+    .search-wrap {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin: 22px 0 14px;
+    }
+
+    .search-wrap[hidden] { display: none; }
+
+    .search-wrap input { flex: 1; }
+
+    .count {
+      color: var(--muted);
+      font-size: .9rem;
+      white-space: nowrap;
+    }
+
+    /* 📺 Canales */
+    .channels {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 14px;
+    }
+
+    .channel-card {
+      background: linear-gradient(180deg, rgba(18, 58, 42, .85), rgba(10, 33, 23, .9));
+      border: 1px solid rgba(154, 209, 212, .16);
+      border-radius: 18px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
+      gap: 12px;
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+    }
+
+    .channel-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(244, 201, 93, .45);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, .3);
+    }
+
+    .channel-top {
+      display: flex;
+      gap: 12px;
       align-items: center;
+      min-width: 0;
     }
 
-    .epg-container {
-      color: #f0f0f0;
-      margin-top: 10px;
-      padding: 10px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 10px;
-      font-size: 14px;
+    .channel-logo {
+      flex: 0 0 54px;
+      width: 54px;
+      height: 54px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, .92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-size: 24px;
     }
 
-    .epg-item h4 {
-      margin: 5px 0;
-      color: #ffda79;
+    .channel-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      padding: 6px;
     }
 
-    .epg-item p {
+    .channel-logo.logo-fallback {
+      background: linear-gradient(135deg, var(--gold-2), var(--gold));
+      color: #241a00;
+      font-weight: 800;
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+
+    .channel-main {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .channel-group {
+      display: inline-block;
+      font-size: .68rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(244, 201, 93, .1);
+      border: 1px solid rgba(244, 201, 93, .25);
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-bottom: 5px;
+    }
+
+    .channel-name {
       margin: 0;
-      font-size: 13px;
-      color: #ddd;
+      font-size: 1.02rem;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    .channel-hash {
+      margin-top: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: .72rem;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    .channel-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .channel-actions .btn {
+      padding: 9px 12px;
+      font-size: .82rem;
+    }
+
+    .epg-box {
+      background: rgba(0, 0, 0, .28);
+      border: 1px solid rgba(154, 209, 212, .14);
+      border-radius: 12px;
+      padding: 12px;
+      font-size: .88rem;
+      color: #d9e7df;
+    }
+
+    .epg-box[hidden] { display: none; }
+
+    .epg-box h4 {
+      margin: 4px 0;
+      color: var(--gold-2);
+      font-size: .9rem;
+    }
+
+    .epg-box p {
+      margin: 6px 0;
+      color: var(--muted);
+    }
+
+    /* 🎁 Reproductor */
+    .player-card { margin-top: 26px; }
+
+    .player-card summary {
+      cursor: pointer;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 1.05rem;
+    }
+
+    .player-card summary::marker { color: var(--holly-2); }
+
+    .player-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .player-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      color: rgba(168, 192, 179, .7);
+      font-size: .85rem;
+      padding: 0 20px 34px;
+    }
+
+    @media (max-width: 560px) {
+      .hero { padding-top: 36px; }
+      .unlock-row .btn { width: 100%; }
+      .search-wrap { flex-direction: column; align-items: stretch; }
+      .count { text-align: right; }
+      .channels { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .snowflake { display: none; }
+      .hero .tree { animation: none; }
     }
   </style>
 </head>
 
 <body>
-  <h2>🏆 Chavakes 🏀⚽</h2>
-  <input type="password" id="password" placeholder="🔑 Contrasenya">
-  <br>
-  <div style="border-radius: 20px;background: rgba(255,255,255,0.12);padding:20px;backdrop-filter:blur(12px);box-shadow:0 6px 15px rgba(0,0,0,0.5);">
-    <h2 style="padding-top: 10px;">⚡ Utilitzar només si no tens reproductor</h2>
-    <button><a href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing"
-        target="_blank" style="color: white;text-decoration:none;">📥 Descarregar Reproductor Encriptat</a></button>
-    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center;">
-      <button onclick="document.getElementById('fileInput').click()">📂 Selecciona Reproductor</button>
-      <input type="file" id="fileInput" style="max-width: 100%; display:none;" type="file">
+  <div id="snow" aria-hidden="true"></div>
+
+  <header class="hero">
+    <div class="tree" aria-hidden="true">
+      <svg viewBox="0 0 120 140" role="img" aria-label="Árbol de Navidad">
+        <defs>
+          <linearGradient id="treeG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#2a9d8f" />
+            <stop offset="1" stop-color="#0f3d2e" />
+          </linearGradient>
+        </defs>
+        <polygon points="60,8 88,48 72,48 96,82 78,82 104,118 16,118 42,82 24,82 48,48 32,48"
+          fill="url(#treeG)" stroke="#9ad1d4" stroke-width="2" stroke-linejoin="round" />
+        <rect x="52" y="118" width="16" height="16" rx="3" fill="#8b5a2b" />
+        <circle cx="60" cy="12" r="7" fill="#ffd166" />
+        <circle cx="42" cy="60" r="4" fill="#e63946" />
+        <circle cx="78" cy="72" r="4" fill="#e63946" />
+        <circle cx="58" cy="95" r="4" fill="#ffd166" />
+        <circle cx="36" cy="100" r="3" fill="#ffd166" />
+        <circle cx="86" cy="100" r="3" fill="#e63946" />
+      </svg>
     </div>
-    <button onclick="decryptFile()">🔓 Desencriptar Reproductor</button>
-  </div>
-  <br>
-  <button onclick="fetchAndDecryptFile()">📥 Desencriptar Llista</button>
-  <br>
-  <a id="downloadLink" style="display: none;">📂 Descargar Archivo</a>
+    <h1>Chavakes <span>Premium</span></h1>
+    <p>Canales, eventos y espíritu navideño ❄️</p>
+    <div class="candy-line" aria-hidden="true"></div>
+  </header>
 
-  <input type="text" id="buscador" placeholder="🔎 Buscador" style="display: none;" oninput="updateSearch()">
-  <div id="fileContent"></div>
+  <main>
+    <section class="card unlock-card" aria-labelledby="unlock-title">
+      <label id="unlock-title" for="password">🔑 Contraseña</label>
+      <div class="unlock-row">
+        <input id="password" type="password" placeholder="Escribe la contraseña" autocomplete="current-password">
+        <button id="btnList" class="btn btn-primary" type="button" onclick="fetchAndDecryptFile()">🔓 Desencriptar lista</button>
+      </div>
+      <p id="status" class="status" role="status" aria-live="polite">Introduce la contraseña y pulsa el botón para cargar los canales.</p>
+    </section>
 
-  <!-- 🚀 JavaScript original incluido -->
+    <section id="searchWrap" class="search-wrap" hidden>
+      <input id="search" type="search" placeholder="🔎 Buscar canal o grupo…" oninput="onSearch()" aria-label="Buscar canal">
+      <span id="count" class="count"></span>
+    </section>
+
+    <section id="channels" class="channels" aria-live="polite"></section>
+
+    <details class="card player-card">
+      <summary>🎁 ¿No tienes reproductor? Ábrelo aquí</summary>
+      <div class="player-body">
+        <p class="muted">Descarga el reproductor cifrado, selecciónalo y descífralo con la misma contraseña.</p>
+        <div class="player-row">
+          <a class="btn btn-secondary" href="https://drive.google.com/file/d/1fpVVYr52kXFQFu7vBRxuqw5u-pg1HLo2/view?usp=sharing" target="_blank" rel="noopener">📥 Descargar reproductor</a>
+        </div>
+        <div class="player-row">
+          <input type="file" id="fileInput" hidden onchange="onFilePicked()">
+          <button class="btn btn-ghost" type="button" onclick="document.getElementById('fileInput').click()">📂 Seleccionar archivo</button>
+          <span id="fileName" class="muted">Ningún archivo seleccionado</span>
+        </div>
+        <div class="player-row">
+          <button class="btn btn-primary" type="button" onclick="decryptPlayer()">🔓 Desencriptar reproductor</button>
+          <a id="downloadLink" class="btn btn-secondary" style="display:none">📂 Descargar reproductor</a>
+        </div>
+        <p id="playerStatus" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </details>
+  </main>
+
+  <footer>Hecho con ❄️ y 🎄 para Chavakes Premium</footer>
+
   <script>
-    async function encryptData(data, password) {
-      const key = await deriveKey(password);
-      const iv = crypto.getRandomValues(new Uint8Array(12));
-      const encryptedData = await crypto.subtle.encrypt(
-        { name: "AES-GCM", iv },
-        key,
-        data
-      );
-      return { encryptedData, iv };
-    }
+    const FILE_URL = "https://davidciria.github.io/file";
+    const EPG_URL = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
 
-    async function decryptData(encryptedData, iv, password) {
-      const key = await deriveKey(password);
-      return crypto.subtle.decrypt(
-        { name: "AES-GCM", iv },
-        key,
-        encryptedData
-      );
-    }
+    let canales = [];
+    let epgMap = null;
+    let epgPromise = null;
 
+    /* ❄️ Nieve */
+    (function makeSnow() {
+      const container = document.getElementById("snow");
+      const flakes = ["❄", "❅", "❆", "•"];
+      for (let i = 0; i < 36; i++) {
+        const flake = document.createElement("span");
+        flake.className = "snowflake";
+        flake.textContent = flakes[i % flakes.length];
+        flake.style.left = (Math.random() * 100) + "vw";
+        flake.style.fontSize = (8 + Math.random() * 14) + "px";
+        flake.style.animationDuration = (9 + Math.random() * 14) + "s";
+        flake.style.animationDelay = (-Math.random() * 20) + "s";
+        flake.style.setProperty("--drift", (Math.random() * 80 - 40) + "px");
+        flake.style.opacity = (0.25 + Math.random() * 0.55).toFixed(2);
+        container.appendChild(flake);
+      }
+    })();
+
+    /* 🔐 Criptografía (igual que antes) */
     async function deriveKey(password) {
       const encoder = new TextEncoder();
       const keyMaterial = await crypto.subtle.importKey(
@@ -224,192 +561,316 @@
       );
     }
 
-    async function decryptFile() {
-      const fileInput = document.getElementById("fileInput");
-      const password = document.getElementById("password").value;
-      if (!password || fileInput.files.length === 0) {
-        alert("Introdueix la contrasenya i selecciona el reproductor encriptat");
-        return;
-      }
-
-      const file = fileInput.files[0];
+    async function decryptData(encryptedData, iv, password) {
       const key = await deriveKey(password);
-      let decryptedChunks = [];
+      return crypto.subtle.decrypt(
+        { name: "AES-GCM", iv },
+        key,
+        encryptedData
+      );
+    }
 
-      const reader = new FileReader();
-      reader.onload = async function (event) {
-        try {
-          const arrayBuffer = event.target.result;
-          let offset = 0;
+    /* 📄 Parser M3U tolerante al orden de atributos y a comas en el nombre */
+    function parseM3U(text) {
+      const lines = text.split(/\r?\n/);
+      const result = [];
+      let current = null;
 
-          while (offset < arrayBuffer.byteLength) {
-            const iv = new Uint8Array(arrayBuffer.slice(offset, offset + 12));
-            offset += 12;
-            const lengthArray = new Uint32Array(arrayBuffer.slice(offset, offset + 4));
-            const encryptedDataLength = lengthArray[0];
-            offset += 4;
-            const encryptedChunk = arrayBuffer.slice(offset, offset + encryptedDataLength);
-            offset += encryptedDataLength;
+      for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) continue;
 
-            try {
-              const decryptedData = await crypto.subtle.decrypt(
-                { name: "AES-GCM", iv },
-                key,
-                encryptedChunk
-              );
-              decryptedChunks.push(new Uint8Array(decryptedData));
-            } catch {
-              alert("Contrasenya incorrecte");
-              return;
-            }
+        if (line.startsWith("#EXTINF")) {
+          const attrs = {};
+          const attrRe = /([\w-]+)="([^"]*)"/g;
+          let match;
+          while ((match = attrRe.exec(line)) !== null) {
+            attrs[match[1]] = match[2];
           }
-
-          const blob = new Blob(decryptedChunks, { type: "application/octet-stream" });
-          const url = URL.createObjectURL(blob);
-          const downloadLink = document.getElementById("downloadLink");
-          downloadLink.href = url;
-          downloadLink.download = "player.exe";
-          downloadLink.style.display = "block";
-          downloadLink.innerText = "📂 Descarregar Reproductor Desencriptat"
-
-        } catch (error) {
-          console.error("Error general:", error);
-          alert("Error al procesar el archivo.");
+          const comma = line.indexOf(",");
+          const nombre = (comma >= 0 ? line.slice(comma + 1) : "").trim();
+          current = {
+            tvgLogo: attrs["tvg-logo"] || "",
+            tvgId: attrs["tvg-id"] || "",
+            groupTitle: attrs["group-title"] || "Otros",
+            nombre: nombre || "Canal sin nombre"
+          };
+          continue;
         }
-      };
-      reader.readAsArrayBuffer(file);
+
+        if (!current) continue;
+
+        let hash = "";
+        if (line.startsWith("acestream://")) {
+          hash = line.slice("acestream://".length).trim();
+        } else {
+          const match = line.match(/[?&]id=([a-f0-9]+)/i);
+          if (match) hash = match[1];
+        }
+
+        if (hash) {
+          current.enlace = hash;
+          result.push(current);
+          current = null;
+        }
+      }
+
+      return result;
     }
 
-    var canales = [];
-
-    async function updateSearch() {
-      const buscador = document.getElementById("buscador");
-      const fileContent = document.getElementById("fileContent");
-      fileContent.innerHTML = '';
-      canales.forEach((c, i) => {
-        if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
-          fileContent.innerHTML += `
-              <div class="channel-card">
-                <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
-                <div class="channel-info">
-                  <h3>${i + 1}. ${c.nombre}</h3>
-                  <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
-                  <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
-                </div>
-                <div id="epg-${i}" class="epg-container"></div>
-              </div>`;
-        }
-      });
+    function setStatus(message, type = "") {
+      const status = document.getElementById("status");
+      status.textContent = message;
+      status.className = "status " + type;
     }
 
+    /* 📥 Descargar y descifrar la lista */
     async function fetchAndDecryptFile() {
-      const url = "https://davidciria.github.io/file";
-      const password = document.getElementById("password").value;
-      if (!url || !password) {
-        alert("Introdueix la contrasenya");
+      const password = document.getElementById("password").value.trim();
+      const button = document.getElementById("btnList");
+
+      if (!password) {
+        setStatus("Introduce la contraseña para descifrar la lista.", "error");
+        document.getElementById("password").focus();
         return;
       }
+
+      button.disabled = true;
+      button.textContent = "⏳ Descifrando…";
+      setStatus("Descargando la lista más reciente…");
+
       try {
-        const response = await fetch(url);
-        const arrayBuffer = await response.arrayBuffer();
-        const iv = new Uint8Array(arrayBuffer.slice(0, 12));
-        const encryptedData = arrayBuffer.slice(12);
+        const response = await fetch(FILE_URL + "?t=" + Date.now(), { cache: "no-store" });
+        if (!response.ok) throw new Error("HTTP " + response.status);
+
+        const buffer = await response.arrayBuffer();
+        if (buffer.byteLength <= 12) throw new Error("Archivo vacío");
+
+        const iv = new Uint8Array(buffer.slice(0, 12));
+        const encryptedData = buffer.slice(12);
         const decryptedData = await decryptData(encryptedData, iv, password);
+        const textContent = new TextDecoder().decode(decryptedData);
 
-        const textDecoder = new TextDecoder();
-        const fileContent = document.getElementById("fileContent");
-        const buscador = document.getElementById("buscador");
-        let textContent = textDecoder.decode(decryptedData);
+        canales = parseM3U(textContent);
 
-        const regex = /#EXTINF:-1\s+tvg-logo="([^"]*)"\s+tvg-id="([^"]*)"\s+group-title="([^"]*)"(?:,\s*([^,]+))?\s*acestream:\/\/([a-f0-9]+)/g;
-
-        let resultado;
-        canales = [];
-
-        while ((resultado = regex.exec(textContent)) !== null) {
-          const tvgLogo = resultado[1];
-          const tvgId = resultado[2];
-          const groupTitle = resultado[3];
-          const nombre = resultado[4].trim();
-          const enlace = resultado[5];
-          canales.push({ tvgLogo, tvgId, groupTitle, nombre, enlace });
+        if (!canales.length) {
+          setStatus("La lista se descifró, pero no se encontraron canales. El formato puede haber cambiado.", "error");
+          return;
         }
 
-        fileContent.innerHTML = '';
-        canales.forEach((c, i) => {
-          if (c.nombre.toLowerCase().includes(buscador.value.toLowerCase())) {
-            fileContent.innerHTML += `
-                <div class="channel-card">
-                  <img class="channel-logo" src="${c.tvgLogo}" alt="${c.nombre}">
-                  <div class="channel-info">
-                    <h3>${i + 1}. ${c.nombre}</h3>
-                    <a href="acestream://${c.enlace}" target="_blank">${c.enlace}</a>
-                    <button onclick="showEpg('${c.tvgId}', 'epg-${i}')">📺 Ver programación</button>
-                  </div>
-                  <div id="epg-${i}" class="epg-container"></div>
-                </div>`;
-          }
-        });
-
-        fileContent.style.display = "block";
-        buscador.style.display = "inline";
-
+        document.getElementById("searchWrap").hidden = false;
+        renderChannels(document.getElementById("search").value);
+        setStatus("✅ " + canales.length + " canales cargados. ¡Feliz Navidad! 🎄", "ok");
       } catch (error) {
-        alert("Error al descarregar o desencriptar, revisa contrasenya");
         console.error(error);
+        setStatus("No se pudo descargar o descifrar la lista. Revisa la contraseña e inténtalo de nuevo.", "error");
+      } finally {
+        button.disabled = false;
+        button.textContent = "🔓 Desencriptar lista";
       }
     }
 
-    let epgXmlDoc = null;
+    /* 🔎 Buscador */
+    function onSearch() {
+      renderChannels(document.getElementById("search").value);
+    }
 
-    async function loadEpg() {
-      const epgUrl = "https://raw.githubusercontent.com/davidmuma/EPG_dobleM/master/guiatv.xml";
+    function renderChannels(filter = "") {
+      const channelsEl = document.getElementById("channels");
+      const query = filter.trim().toLowerCase();
+      const fragment = document.createDocumentFragment();
+      let visible = 0;
+
+      for (const canal of canales) {
+        const haystack = (canal.nombre + " " + canal.groupTitle + " " + canal.tvgId).toLowerCase();
+        if (query && !haystack.includes(query)) continue;
+        visible++;
+        fragment.appendChild(buildCard(canal));
+      }
+
+      channelsEl.replaceChildren(fragment);
+
+      const count = document.getElementById("count");
+      count.textContent = visible + " de " + canales.length;
+
+      if (!visible && canales.length) {
+        const empty = document.createElement("p");
+        empty.className = "muted";
+        empty.textContent = "No hay canales que coincidan con la búsqueda.";
+        channelsEl.appendChild(empty);
+      }
+    }
+
+    function buildCard(canal) {
+      const card = document.createElement("article");
+      card.className = "channel-card";
+
+      const top = document.createElement("div");
+      top.className = "channel-top";
+
+      const logo = document.createElement("div");
+      logo.className = "channel-logo";
+
+      function showLogoFallback() {
+        logo.replaceChildren();
+        logo.classList.add("logo-fallback");
+        logo.textContent = (canal.nombre || "?").trim().charAt(0).toUpperCase() || "?";
+      }
+
+      if (canal.tvgLogo) {
+        const img = new Image();
+        img.src = canal.tvgLogo;
+        img.alt = canal.nombre;
+        img.loading = "lazy";
+        img.referrerPolicy = "no-referrer";
+        img.onerror = showLogoFallback;
+        logo.appendChild(img);
+      } else {
+        showLogoFallback();
+      }
+
+      const main = document.createElement("div");
+      main.className = "channel-main";
+
+      const group = document.createElement("span");
+      group.className = "channel-group";
+      group.textContent = canal.groupTitle || "Otros";
+
+      const name = document.createElement("h3");
+      name.className = "channel-name";
+      name.textContent = canal.nombre;
+
+      const hash = document.createElement("div");
+      hash.className = "channel-hash";
+      hash.textContent = canal.enlace;
+
+      main.append(group, name, hash);
+      top.append(logo, main);
+
+      const epgBox = document.createElement("div");
+      epgBox.className = "epg-box";
+      epgBox.hidden = true;
+
+      const actions = document.createElement("div");
+      actions.className = "channel-actions";
+
+      const play = document.createElement("a");
+      play.className = "btn btn-play";
+      play.href = "acestream://" + canal.enlace;
+      play.target = "_blank";
+      play.rel = "noopener";
+      play.textContent = "▶ Abrir";
+
+      const copy = document.createElement("button");
+      copy.className = "btn btn-ghost";
+      copy.type = "button";
+      copy.textContent = "📋 Copiar";
+      copy.addEventListener("click", async function () {
+        const ok = await copyText(canal.enlace);
+        copy.textContent = ok ? "✓ Copiado" : "Error";
+        setTimeout(function () {
+          copy.textContent = "📋 Copiar";
+        }, 1500);
+      });
+
+      const epgButton = document.createElement("button");
+      epgButton.className = "btn btn-ghost";
+      epgButton.type = "button";
+      epgButton.textContent = "📺 Guía";
+      epgButton.addEventListener("click", function () {
+        toggleEpg(canal, epgBox);
+      });
+
+      actions.append(play, copy, epgButton);
+      card.append(top, actions, epgBox);
+      return card;
+    }
+
+    async function copyText(text) {
       try {
-        const response = await fetch(epgUrl);
-        const epgXml = await response.text();
-        const parser = new DOMParser();
-        epgXmlDoc = parser.parseFromString(epgXml, "text/xml");
+        await navigator.clipboard.writeText(text);
+        return true;
       } catch (error) {
-        console.error("Error cargando EPG:", error);
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        const ok = document.execCommand("copy");
+        textarea.remove();
+        return ok;
       }
     }
 
-    function parseEpgDate(epgDate) {
-      const rawDate = epgDate.split(" ")[0];
-      const tzOffset = epgDate.split(" ")[1] || "+0000";
+    /* 📺 EPG (se carga solo cuando hace falta) */
+    function ensureEpg() {
+      if (epgMap) return Promise.resolve(epgMap);
+      if (epgPromise) return epgPromise;
+
+      epgPromise = (async function () {
+        const response = await fetch(EPG_URL, { cache: "force-cache" });
+        if (!response.ok) throw new Error("EPG HTTP " + response.status);
+        const xml = await response.text();
+        const doc = new DOMParser().parseFromString(xml, "text/xml");
+        const map = new Map();
+
+        for (const programme of doc.querySelectorAll("programme")) {
+          const channel = (programme.getAttribute("channel") || "").toLowerCase();
+          if (!channel) continue;
+          const item = {
+            title: programme.querySelector("title") ? programme.querySelector("title").textContent : "Desconocido",
+            description: programme.querySelector("desc") ? programme.querySelector("desc").textContent : "",
+            start: parseEpgDate(programme.getAttribute("start")),
+            stop: parseEpgDate(programme.getAttribute("stop"))
+          };
+          if (!map.has(channel)) map.set(channel, []);
+          map.get(channel).push(item);
+        }
+
+        for (const programs of map.values()) {
+          programs.sort(function (a, b) { return a.start - b.start; });
+        }
+
+        epgMap = map;
+        return map;
+      })().catch(function (error) {
+        epgPromise = null;
+        throw error;
+      });
+
+      return epgPromise;
+    }
+
+    function parseEpgDate(value) {
+      if (!value) return new Date(0);
+      const rawDate = value.split(" ")[0];
+      const tzOffset = value.split(" ")[1] || "+0000";
       const sign = tzOffset[0] === "+" ? 1 : -1;
       const hoursOffset = parseInt(tzOffset.substring(1, 3), 10);
       const minutesOffset = parseInt(tzOffset.substring(3, 5), 10);
       const totalOffsetMinutes = sign * (hoursOffset * 60 + minutesOffset);
 
       const dateUtc = new Date(Date.UTC(
-        parseInt(rawDate.substring(0, 4)),
-        parseInt(rawDate.substring(4, 6)) - 1,
-        parseInt(rawDate.substring(6, 8)),
-        parseInt(rawDate.substring(8, 10)),
-        parseInt(rawDate.substring(10, 12)),
-        parseInt(rawDate.substring(12, 14))
+        parseInt(rawDate.substring(0, 4), 10),
+        parseInt(rawDate.substring(4, 6), 10) - 1,
+        parseInt(rawDate.substring(6, 8), 10),
+        parseInt(rawDate.substring(8, 10), 10),
+        parseInt(rawDate.substring(10, 12), 10),
+        parseInt(rawDate.substring(12, 14), 10)
       ));
+
       return new Date(dateUtc.getTime() - totalOffsetMinutes * 60000);
     }
 
-    function getEpgForChannel(channelName) {
-      if (!epgXmlDoc) return { current: null, next: null };
+    function getEpgForChannel(channelId) {
+      if (!epgMap) return { current: null, next: null };
+      const programs = epgMap.get(channelId.toLowerCase()) || [];
       const now = new Date();
-      const programs = [...epgXmlDoc.querySelectorAll("programme")]
-        .map(program => ({
-          channel: program.getAttribute("channel"),
-          title: program.querySelector("title")?.textContent || "Desconocido",
-          description: program.querySelector("desc")?.textContent || "Sin descripción",
-          start: parseEpgDate(program.getAttribute("start")),
-          stop: parseEpgDate(program.getAttribute("stop"))
-        }))
-        .filter(p => p.channel.toLowerCase() === channelName.toLowerCase())
-        .sort((a, b) => a.start - b.start);
-
-      const current = programs.find(p => now >= p.start && now < p.stop) || null;
-      const next = programs.find(p => p.start > now) || null;
-      return { current, next };
+      return {
+        current: programs.find(function (p) { return now >= p.start && now < p.stop; }) || null,
+        next: programs.find(function (p) { return p.start > now; }) || null
+      };
     }
 
     function formatTime(date) {
@@ -420,32 +881,123 @@
       }).format(date);
     }
 
-    function showEpg(channelName, containerId) {
-      const epgData = getEpgForChannel(channelName);
-      const container = document.getElementById(containerId);
-
-      if (!epgData || (!epgData.current && !epgData.next)) {
-        container.innerHTML = "<p>No hay programación disponible.</p>";
+    async function toggleEpg(canal, box) {
+      if (!box.hidden) {
+        box.hidden = true;
         return;
       }
 
-      let epgHtml = "";
-      if (epgData.current) {
-        epgHtml += `<div class="epg-item">
-          <h4>🔴 Ahora: ${epgData.current.title} (${formatTime(epgData.current.start)} - ${formatTime(epgData.current.stop)})</h4>
-          <p>${epgData.current.description}</p>
-        </div>`;
+      box.hidden = false;
+      box.textContent = "Cargando guía…";
+
+      if (!canal.tvgId) {
+        box.textContent = "Este canal no tiene guía disponible.";
+        return;
       }
-      if (epgData.next) {
-        epgHtml += `<div class="epg-item">
-          <h4>▶️ Siguiente: ${epgData.next.title} (${formatTime(epgData.next.start)} - ${formatTime(epgData.next.stop)})</h4>
-          <p>${epgData.next.description}</p>
-        </div>`;
+
+      try {
+        await ensureEpg();
+        const epg = getEpgForChannel(canal.tvgId);
+
+        if (!epg.current && !epg.next) {
+          box.textContent = "No hay programación disponible para este canal.";
+          return;
+        }
+
+        box.replaceChildren();
+        if (epg.current) box.appendChild(buildEpgItem("🔴 Ahora", epg.current));
+        if (epg.next) box.appendChild(buildEpgItem("▶️ Siguiente", epg.next));
+      } catch (error) {
+        console.error(error);
+        box.textContent = "No se pudo cargar la guía. Inténtalo más tarde.";
       }
-      container.innerHTML = epgHtml;
     }
 
-    loadEpg();
+    function buildEpgItem(label, program) {
+      const wrapper = document.createElement("div");
+      const title = document.createElement("h4");
+      title.textContent = label + ": " + program.title + " (" + formatTime(program.start) + " - " + formatTime(program.stop) + ")";
+      const description = document.createElement("p");
+      description.textContent = program.description || "Sin descripción";
+      wrapper.append(title, description);
+      return wrapper;
+    }
+
+    /* 🎁 Reproductor */
+    function onFilePicked() {
+      const file = document.getElementById("fileInput").files[0];
+      document.getElementById("fileName").textContent = file ? file.name : "Ningún archivo seleccionado";
+      document.getElementById("downloadLink").style.display = "none";
+      const status = document.getElementById("playerStatus");
+      status.textContent = "";
+      status.className = "status";
+    }
+
+    async function decryptPlayer() {
+      const file = document.getElementById("fileInput").files[0];
+      const password = document.getElementById("password").value.trim();
+      const status = document.getElementById("playerStatus");
+
+      function setPlayerStatus(message, type = "") {
+        status.textContent = message;
+        status.className = "status " + type;
+      }
+
+      if (!password) {
+        setPlayerStatus("Introduce la contraseña arriba.", "error");
+        document.getElementById("password").focus();
+        return;
+      }
+
+      if (!file) {
+        setPlayerStatus("Selecciona primero el reproductor cifrado.", "error");
+        return;
+      }
+
+      setPlayerStatus("Descifrando reproductor…");
+
+      try {
+        const buffer = await file.arrayBuffer();
+        const key = await deriveKey(password);
+        const view = new DataView(buffer);
+        const chunks = [];
+        let offset = 0;
+
+        while (offset < buffer.byteLength) {
+          if (offset + 16 > buffer.byteLength) throw new Error("Archivo incompleto");
+
+          const iv = new Uint8Array(buffer.slice(offset, offset + 12));
+          offset += 12;
+
+          const length = view.getUint32(offset, true);
+          offset += 4;
+
+          if (offset + length > buffer.byteLength) throw new Error("Archivo incompleto");
+
+          const encryptedChunk = buffer.slice(offset, offset + length);
+          offset += length;
+
+          const decryptedChunk = await crypto.subtle.decrypt(
+            { name: "AES-GCM", iv },
+            key,
+            encryptedChunk
+          );
+          chunks.push(new Uint8Array(decryptedChunk));
+        }
+
+        const blob = new Blob(chunks, { type: "application/octet-stream" });
+        const url = URL.createObjectURL(blob);
+        const link = document.getElementById("downloadLink");
+        link.href = url;
+        link.download = "player.exe";
+        link.style.display = "inline-flex";
+        link.textContent = "📂 Descargar reproductor";
+        setPlayerStatus("✅ Listo (" + (blob.size / 1024 / 1024).toFixed(1) + " MB).", "ok");
+      } catch (error) {
+        console.error(error);
+        setPlayerStatus("No se pudo descifrar. Revisa la contraseña y que el archivo sea el correcto.", "error");
+      }
+    }
   </script>
 </body>
 
