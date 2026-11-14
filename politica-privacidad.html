@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Política de privacidad — Dacima Gmail Gateway (David Ciria Mayordomo)</title>
+<style>
+  body { font-family: system-ui, -apple-system, sans-serif; max-width: 760px; margin: 3rem auto; padding: 0 1.2rem; color: #1f1f1f; line-height: 1.65; }
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.15rem; margin-top: 1.8rem; }
+  a { color: #1a73e8; }
+  footer { margin-top: 3rem; color: #777; font-size: .9rem; }
+</style>
+</head>
+<body>
+  <h1>Política de privacidad — Dacima Gmail Gateway</h1>
+  <p><strong>Responsable:</strong> David Ciria Mayordomo (<a href="https://github.com/davidciria">github.com/davidciria</a>)<br>
+  <strong>Contacto:</strong> davidciriamayo@gmail.com<br>
+  <strong>Última actualización:</strong> 14 de noviembre de 2026</p>
+
+  <h2>1. Qué es esta aplicación</h2>
+  <p>Dacima Gmail Gateway es un servicio personal y familiar que permite a los miembros
+  autorizados del hogar del responsable consultar y gestionar <strong>su propia cuenta de
+  Gmail</strong> mediante un asistente de inteligencia artificial alojado en un servidor
+  doméstico privado. Cada usuario conecta únicamente su propia cuenta y solo puede operar
+  sobre ella.</p>
+
+  <h2>2. Qué datos trata</h2>
+  <ul>
+    <li><strong>Contenido de Gmail del propio usuario que autoriza:</strong> mensajes, remitentes,
+    asuntos, etiquetas, filtros y adjuntos, únicamente cuando dicho usuario lo solicita en el
+    chat o pide una acción concreta.</li>
+    <li><strong>Credenciales OAuth de Google:</strong> tokens de acceso y de actualización
+    vinculados a la cuenta que el usuario autoriza.</li>
+    <li><strong>Identificador de usuario:</strong> la dirección de correo de la cuenta del
+    servicio de chat, para vincular cada usuario con sus propios tokens.</li>
+  </ul>
+  <p>La aplicación <strong>no</strong> trata datos de usuarios que no hayan conectado su cuenta,
+  ni datos de navegación, ni datos de terceros salvo los que aparecen en los correos que el
+  propio usuario solicita consultar.</p>
+
+  <h2>3. Para qué se utilizan</h2>
+  <p>Exclusivamente para ejecutar las acciones que el usuario pide en el chat: leer, buscar,
+  enviar, archivar o etiquetar correos, gestionar etiquetas y filtros, y descargar adjuntos.
+  No existe ningún tratamiento automatizado adicional, ningún perfilado y ningún uso
+  publicitario o analítico.</p>
+
+  <h2>4. Dónde se almacenan</h2>
+  <p>Todos los datos (tokens y adjuntos descargados) se guardan en un servidor privado del
+  responsable (Orange Pi) al que solo se accede dentro de una red privada (Tailscale). Los
+  datos <strong>no se ceden a terceros</strong>, no salen de esa red y no se comparten con
+  ningún proveedor. La comunicación con Google se realiza directamente entre el servidor
+  doméstico y la API oficial de Google.</p>
+
+  <h2>5. Durante cuánto tiempo</h2>
+  <p>Los tokens se conservan mientras el usuario mantenga su cuenta conectada. Cada usuario
+  puede desconectar su cuenta en cualquier momento desde la página de conexión del propio
+  servicio, o revocar el acceso globalmente desde
+  <a href="https://myaccount.google.com/permissions">myaccount.google.com/permissions</a>.
+  Los adjuntos descargados a petición del usuario permanecen en el servidor hasta que se
+  borren manualmente.</p>
+
+  <h2>6. Base legal</h2>
+  <p>El consentimiento expreso del usuario en el momento de autorizar el acceso a su cuenta
+  de Google (artículo 6.1.a del RGPD). El acceso se limita a los permisos
+  <em>gmail.modify</em> y <em>gmail.settings.basic</em> que el propio usuario concede.</p>
+
+  <h2>7. Derechos</h2>
+  <p>Al tratarse de un servicio personal que solo trata datos de las propias personas que
+  autorizan el acceso y bajo su control, los ejercicios de acceso, supresión o revocación se
+  realizan directamente: desconectando la cuenta en el servicio o revocando el permiso en la
+  página de permisos de Google. Para cualquier otra cuestión, escribir al correo de contacto.</p>
+
+  <footer>Dacima Gmail Gateway — David Ciria Mayordomo — 2026</footer>
+</body>
+</html>
